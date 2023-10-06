@@ -18,20 +18,6 @@ public class Specifications {
                     .build();
         }
 
-        public static ResponseSpecification responseSpecificationOK200(){
-            return new ResponseSpecBuilder()
-                    .expectResponseTime(lessThan(1000L))
-                    .expectStatusCode(200)
-                    .build();
-        }
-
-    public static ResponseSpecification responseSpecificationNotOK400(){
-        return new ResponseSpecBuilder()
-                .expectResponseTime(lessThan(1000L))
-                .expectStatusCode(400)
-                .build();
-    }
-
     public static ResponseSpecification responseSpecificationUnique(int enterExpectedStatucCode){
         return new ResponseSpecBuilder()
                 .expectResponseTime(lessThan(1000L))
