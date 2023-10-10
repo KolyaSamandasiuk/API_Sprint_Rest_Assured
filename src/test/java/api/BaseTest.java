@@ -1,6 +1,8 @@
 package api;
 
-public class BaseTest {
+import static api.Const.BASE_URL;
 
-    protected static BaseRestClient baseRestClient = new BaseRestClient("https://api.trello.com");
+public class BaseTest {
+    protected static BoardClient boardClient = new BoardClient(BASE_URL);
+    protected static ListClient listClient = new ListClient(BASE_URL);
 }
