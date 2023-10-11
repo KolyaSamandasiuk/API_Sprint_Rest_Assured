@@ -1,4 +1,4 @@
-package api.POJO;
+package api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;

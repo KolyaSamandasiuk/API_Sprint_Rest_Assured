@@ -1,5 +1,8 @@
 package api;
 
+import api.clients.BoardClient;
+import api.clients.ListClient;
+
 import static api.Const.BASE_URL;
 
 public class BaseTest {
