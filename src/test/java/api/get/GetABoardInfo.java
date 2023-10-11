@@ -2,6 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.BoardDataResponse;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -22,19 +23,16 @@ public class GetABoardInfo extends BaseTest {
     }
 
     @Test
-    public void getABoardIndo() {
+    @Description("Getting information about the board by id")
+    public void getABoardById() {
         BoardDataResponse response = boardClient.getBoardById(ID_BOARD);
 
-        verifyBoardByNameAndDescription(response, NAME_VALUE, DESC_VALUE);
+        Assert.assertEquals(NAME_VALUE, response.getName());
+        Assert.assertEquals(DESC_VALUE, response.getDesc());
     }
 
     @AfterMethod
     public void delete() {
         boardClient.deleteBoardIfExist(ID_BOARD);
-    }
-
-    private static void verifyBoardByNameAndDescription(BoardDataResponse boardData, String expectedName, String expectedDescription) {
-        Assert.assertEquals(expectedName, boardData.getName());
-        Assert.assertEquals(expectedDescription, boardData.getDesc());
     }
 }
