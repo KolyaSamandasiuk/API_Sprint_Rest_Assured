@@ -1,11 +1,9 @@
 package api;
 
-import api.clients.BoardClient;
-import api.clients.ListClient;
-
-import static api.Const.BASE_URL;
+import api.clients.BoardTestRestClient;
+import api.clients.ListTestRestClient;
 
 public class BaseTest {
-    protected static BoardClient boardClient = new BoardClient(BASE_URL);
-    protected static ListClient listClient = new ListClient(BASE_URL);
+    protected static BoardTestRestClient boardClient = new BoardTestRestClient(TestProperties.getBaseUrl());
+    protected static ListTestRestClient listClient = new ListTestRestClient(TestProperties.getBaseUrl());
 }
