@@ -13,6 +13,7 @@ target/
 *.iml
 *.ipr
 .idea
+application.conf
 
 ### Eclipse ###
 .apt_generated
@@ -40,4 +41,3 @@ build/
 .DS_Store
 
 /resources/application.conf
-application.conf
