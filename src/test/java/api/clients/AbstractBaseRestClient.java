@@ -3,21 +3,19 @@ package api.clients;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-import java.util.Map;
-
 import static api.clients.ConfigProvider.KEY;
 import static api.clients.ConfigProvider.TOKEN;
 import static io.restassured.RestAssured.given;
 
 public abstract class AbstractBaseRestClient {
     protected final RequestSpecification requestSpec;
-    private final static Map<String, String> KEYANDTOKEN = Map.of("key", KEY, "token", TOKEN);
 
     public AbstractBaseRestClient(String url) {
 
         requestSpec = given().baseUri(url)
                 .contentType(ContentType.JSON)
-                .queryParams(KEYANDTOKEN);
+                .queryParam("key", KEY)
+                .queryParam("token", TOKEN);
 
         if (url.matches("^(https)://.*$")) {
             requestSpec.relaxedHTTPSValidation();
