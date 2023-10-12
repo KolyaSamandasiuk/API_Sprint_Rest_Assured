@@ -1,7 +1,7 @@
 package api.post;
 
 import api.BaseTest;
-import api.clients.BoardClient;
+import api.clients.BoardRestTestClient;
 import api.dto.CreateBoardResponse;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -13,7 +13,7 @@ import java.util.Map;
 import static api.Const.BASE_URL;
 
 public class CreateANewBoard extends BaseTest {
-    private BoardClient boardClient = new BoardClient(BASE_URL);
+    private BoardRestTestClient boardRestTestClient = new BoardRestTestClient(BASE_URL);
     private String ID_BOARD;
 
     @Test
@@ -22,7 +22,7 @@ public class CreateANewBoard extends BaseTest {
         Map<String, String> boardParams = new HashMap<>();
         boardParams.put("name", "Test board");
 
-        CreateBoardResponse response = boardClient.createNewBoard(boardParams);
+        CreateBoardResponse response = boardRestTestClient.createNewBoard(boardParams);
         ID_BOARD = response.getId();
 
         Assert.assertNotNull(response, "Board creation failed");
@@ -32,6 +32,6 @@ public class CreateANewBoard extends BaseTest {
 
     @AfterMethod
     public void deleteBoard() {
-        boardClient.deleteBoardIfExist(ID_BOARD);
+        boardRestTestClient.deleteBoardIfExist(ID_BOARD);
     }
 }
