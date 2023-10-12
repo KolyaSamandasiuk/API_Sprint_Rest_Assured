@@ -28,12 +28,8 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .spec(requestSpec)
                 .queryParams(createBoardKeyValue)
                 .when()
-                .log()
-                .all()
                 .post("/1/boards/")
                 .then()
-                .log()
-                .all()
                 .statusCode(HTTP_OK)
                 .extract().as(CreateBoardResponse.class);
     }
