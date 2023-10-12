@@ -23,7 +23,7 @@ public class GetListsOnBoardTest extends BaseTest {
 
     @BeforeMethod
     public void createBoard() {
-        boardId = boardRestTestClient.createNewBoard(Map.of("name", "Test board")).getId();
+        boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         getReversedSubListNames(expectedListNames).forEach(name -> listTestRestClient.createList(name, boardId));
     }
 
