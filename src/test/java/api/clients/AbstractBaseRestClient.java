@@ -15,7 +15,8 @@ public abstract class AbstractBaseRestClient {
         requestSpec = given().baseUri(url)
                 .contentType(ContentType.JSON)
                 .queryParam("key", KEY)
-                .queryParam("token", TOKEN);
+                .queryParam("token", TOKEN)
+                .log().all();
 
         if (url.matches("^(https)://.*$")) {
             requestSpec.relaxedHTTPSValidation();
