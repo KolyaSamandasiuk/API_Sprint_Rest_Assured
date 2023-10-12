@@ -6,6 +6,7 @@ import api.dto.ListsDataResponse;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
+import io.restassured.response.ValidatableResponse;
 
 import java.util.List;
 import java.util.Map;
@@ -16,31 +17,30 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.Matchers.is;
 
-public class BoardClient extends AbstractBaseRestClient {
+public class BoardRestTestClient extends AbstractBaseRestClient {
 
-    public BoardClient(String url) {
+    public BoardRestTestClient(String url) {
         super(url);
     }
 
-    public CreateBoardResponse createNewBoard(Map<String, String> stringMap) {
+    public CreateBoardResponse createNewBoard(Map<String, String> createBoardKeyValue) {
         return given()
                 .spec(requestSpec)
-                .queryParams(stringMap)
+                .queryParams(createBoardKeyValue)
                 .when()
                 .post("/1/boards/")
                 .then()
-                .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)))
+                .statusCode(HTTP_OK)
                 .extract().as(CreateBoardResponse.class);
     }
 
-    public JsonPath deleteBoardIfExist(String boardId) {
+    public ValidatableResponse deleteBoardIfExist(String boardId) {
         return given()
                 .spec(requestSpec)
                 .when()
                 .delete("/1/boards/{id}", boardId)
                 .then()
-                .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)))
-                .extract().jsonPath();
+                .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
     public BoardDataResponse getBoardById(String boardId) {

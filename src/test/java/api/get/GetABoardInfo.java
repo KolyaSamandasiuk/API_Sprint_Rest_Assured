@@ -19,13 +19,13 @@ public class GetABoardInfo extends BaseTest {
 
     @BeforeMethod
     public void createBoard() {
-        ID_BOARD = boardClient.createNewBoard(Map.of("name", NAME_VALUE, "desc", DESC_VALUE)).getId();
+        ID_BOARD = boardRestTestClient.createNewBoard(Map.of("name", NAME_VALUE, "desc", DESC_VALUE)).getId();
     }
 
     @Test
     @Description("Getting information about the board by id")
     public void getABoardById() {
-        BoardDataResponse response = boardClient.getBoardById(ID_BOARD);
+        BoardDataResponse response = boardRestTestClient.getBoardById(ID_BOARD);
 
         Assert.assertEquals(NAME_VALUE, response.getName());
         Assert.assertEquals(DESC_VALUE, response.getDesc());
@@ -33,6 +33,6 @@ public class GetABoardInfo extends BaseTest {
 
     @AfterMethod
     public void delete() {
-        boardClient.deleteBoardIfExist(ID_BOARD);
+        boardRestTestClient.deleteBoardIfExist(ID_BOARD);
     }
 }
