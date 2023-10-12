@@ -8,9 +8,9 @@ import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class ListClient extends AbstractBaseRestClient {
+public class ListTestRestClient extends AbstractBaseRestClient {
 
-    public ListClient(String url) {
+    public ListTestRestClient(String url) {
         super(url);
     }
 
@@ -20,8 +20,9 @@ public class ListClient extends AbstractBaseRestClient {
                 .queryParams("name", listName)
                 .when()
                 .post("/1/boards/{id}/lists", boardId)
-                .then().log().all()
-                .extract().as(CreateListResponse.class);
+                .then()
+                .extract()
+                .as(CreateListResponse.class);
     }
 
     public List<ListsDataResponse> getLists(String boardId) {
@@ -30,6 +31,7 @@ public class ListClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}/lists", boardId)
                 .then()
                 .extract()
-                .as(new TypeRef<List<ListsDataResponse>>() {});
+                .as(new TypeRef<List<ListsDataResponse>>() {
+                });
     }
 }
