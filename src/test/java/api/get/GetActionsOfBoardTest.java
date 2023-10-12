@@ -1,6 +1,7 @@
 package api.get;
 
 import api.BaseTest;
+import jdk.jfr.Description;
 import org.apache.http.HttpStatus;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,6 +22,7 @@ public class GetActionsOfBoardTest extends BaseTest {
     }
 
     @Test
+    @Description("Getting information about action on the boards")
     public void GetActionsOfBoard() {
         actionsRestTestClient.getJsonResponse( ID_BOARD)
                 .assertThat()
