@@ -2,7 +2,6 @@ package api.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
-import lombok.Getter;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
