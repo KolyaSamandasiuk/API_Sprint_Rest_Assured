@@ -17,7 +17,7 @@ public class BoardClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    public  CreateBoardResponse createNewBoard(Map<String, String> stringMap) {
+    public CreateBoardResponse createNewBoard(Map<String, String> stringMap) {
         return given()
                 .spec(requestSpec)
                 .queryParams(stringMap)

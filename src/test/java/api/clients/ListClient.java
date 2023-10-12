@@ -30,6 +30,7 @@ public class ListClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}/lists", boardId)
                 .then()
                 .extract()
-                .as(new TypeRef<List<ListsDataResponse>>() {});
+                .as(new TypeRef<List<ListsDataResponse>>() {
+                });
     }
 }
