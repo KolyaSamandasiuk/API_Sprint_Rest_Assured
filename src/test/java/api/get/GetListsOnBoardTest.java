@@ -25,7 +25,7 @@ public class GetListsOnBoardTest extends BaseTest {
     @Test
     public void getListsOnBoard() {
 
-        List<String> expectedListNames = List.of("List 3", "List 2", "List 1", "Нужно сделать", "В процессе", "Готово");
+        List<String> expectedListNames = List.of("List 3", "List 2", "List 1", "To Do", "Doing", "Done");
         List<String> reversedSubListNames = expectedListNames.subList(0, 3).stream()
                 .collect(Collectors.collectingAndThen(Collectors.toList(), result -> {
                     Collections.reverse(result);
