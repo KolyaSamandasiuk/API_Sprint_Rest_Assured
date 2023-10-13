@@ -10,7 +10,7 @@ public class ActionsRestTestClient extends AbstractBaseRestClient{
         super(url);
     }
 
-    public ValidatableResponse getJsonResponse( String boardId) {
+    public ValidatableResponse getActionOfBoard(String boardId) {
         return given()
                 .spec(requestSpec)
                 .when()

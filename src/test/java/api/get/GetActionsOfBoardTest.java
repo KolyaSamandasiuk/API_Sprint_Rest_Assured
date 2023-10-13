@@ -24,7 +24,7 @@ public class GetActionsOfBoardTest extends BaseTest {
     @Test
     @Description("Getting information about action on the boards")
     public void GetActionsOfBoard() {
-        actionsRestTestClient.getJsonResponse( ID_BOARD)
+        actionsRestTestClient.getActionOfBoard( ID_BOARD)
                 .assertThat()
                 .statusCode(HttpStatus.SC_OK)
                 .body(matchesJsonSchemaInClasspath("ResponseSchemaDirectory/schema.json"));
