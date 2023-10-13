@@ -2,13 +2,9 @@ package api.clients;
 
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
-import api.dto.ListsDataResponse;
-import io.restassured.common.mapper.TypeRef;
-import io.restassured.path.json.JsonPath;
-import org.testng.Assert;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
-import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -49,5 +45,13 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId)
                 .then()
                 .extract().as(BoardDataResponse.class);
+
+
+    }
+
+public Response getBoardId(String boardId) {
+    return given()
+            .spec(requestSpec)
+            .get("/1/boards/{id}", boardId);
     }
 }
