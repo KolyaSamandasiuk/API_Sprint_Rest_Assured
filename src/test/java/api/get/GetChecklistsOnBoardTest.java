@@ -12,32 +12,32 @@ import java.util.Map;
 
 public class GetChecklistsOnBoardTest extends BaseTest {
 
-    private static String ID_BOARD;
-    private static String LIST_ID;
-    private static String CARD_ID;
-    private static String CHECKLIST_ID;
+    private String id_board;
+    private String list_id;
+    private String card_id;
+    private String checklist_id;
 
     @BeforeMethod
     public void createBoard() {
-        ID_BOARD = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-        LIST_ID = listTestRestClient.createList(constructDefaultBoardKeyValue(), ID_BOARD).getId();
-        CARD_ID = cardTestRestClient.createCard(LIST_ID).getId();
-        CHECKLIST_ID = checklistTestRestClient.createChecklist(CARD_ID).getId();
+        id_board = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
+        list_id = listTestRestClient.createList(constructDefaultBoardKeyValue(), id_board).getId();
+        card_id = cardTestRestClient.createCard(list_id).getId();
+        checklist_id = checklistTestRestClient.createChecklist(card_id).getId();
     }
 
     @Test
     @Description("Getting checklist on a boards")
     public void getChecklistOnBoard() {
-        checklistTestRestClient.deleteChecklist(CHECKLIST_ID);
-        String response = checklistTestRestClient.getChecklistAfterDelete(ID_BOARD).jsonPath().getString("");
+        checklistTestRestClient.deleteChecklist(checklist_id);
+        String response = checklistTestRestClient.getChecklistAfterDelete(id_board).jsonPath().getString("");
 
         Assert.assertEquals(response, "[]");
     }
 
     @AfterMethod
     public void delete() {
-        cardTestRestClient.deleteCart(CARD_ID);
-        boardRestTestClient.deleteBoardIfExist(ID_BOARD);
+        cardTestRestClient.deleteCart(card_id);
+        boardRestTestClient.deleteBoardIfExist(id_board);
     }
 
     private Map<String, String> constructDefaultBoardKeyValue() {

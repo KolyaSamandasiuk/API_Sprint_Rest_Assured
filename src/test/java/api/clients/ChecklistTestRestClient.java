@@ -10,7 +10,6 @@ import java.util.List;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-
 public class ChecklistTestRestClient extends AbstractBaseRestClient {
 
     public ChecklistTestRestClient(String url) {

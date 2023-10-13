@@ -6,7 +6,6 @@ import io.restassured.response.ValidatableResponse;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-
 public class CardTestRestClient extends AbstractBaseRestClient {
 
     public CardTestRestClient(String url) {
