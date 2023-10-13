@@ -2,7 +2,6 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.CreateLabelResponse;
-import api.dto.ListsDataResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
