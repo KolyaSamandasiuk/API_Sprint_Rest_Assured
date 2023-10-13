@@ -2,6 +2,7 @@ package api.clients;
 
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import java.util.Map;
@@ -44,5 +45,11 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId)
                 .then()
                 .extract().as(BoardDataResponse.class);
+    }
+
+public Response getBoardId(String boardId) {
+    return given()
+            .spec(requestSpec)
+            .get("/1/boards/{id}", boardId);
     }
 }
