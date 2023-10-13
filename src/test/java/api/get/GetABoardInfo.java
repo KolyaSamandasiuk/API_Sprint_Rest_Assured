@@ -25,6 +25,7 @@ public class GetABoardInfo extends BaseTest {
     @Test
     @Description("Getting information about the board by id")
     public void getABoardById() {
+
         BoardDataResponse response = boardRestTestClient.getBoardById(ID_BOARD);
 
         Assert.assertEquals(NAME_VALUE, response.getName());
