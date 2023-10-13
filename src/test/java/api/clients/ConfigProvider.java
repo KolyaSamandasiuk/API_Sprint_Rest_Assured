@@ -12,5 +12,4 @@ public interface ConfigProvider {
 
     String KEY = readConf().getString("key");
     String TOKEN = readConf().getString("token");
-
 }

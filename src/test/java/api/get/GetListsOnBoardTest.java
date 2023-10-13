@@ -7,8 +7,6 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -20,11 +18,12 @@ public class GetListsOnBoardTest extends BaseTest {
 
     private String boardId;
     private final List<String> expectedListNames = List.of("List 3", "List 2", "List 1", "To Do", "Doing", "Done");
+    private final List<String> listNamesForCreate = List.of("List 1", "List 2", "List 3");
 
     @BeforeMethod
     public void createBoard() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-        getReversedSubListNames(expectedListNames).forEach(name -> listTestRestClient.createList(name, boardId));
+        listNamesForCreate.forEach(name -> listTestRestClient.createList(constructDefaultListKeyValue(name), boardId));
     }
 
     @Test
@@ -44,10 +43,8 @@ public class GetListsOnBoardTest extends BaseTest {
         return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 
-    private List<String> getReversedSubListNames(List<String> lists) {
-        List<String> reversedList = new ArrayList<>(lists.subList(0, 3));
-        Collections.reverse(reversedList);
-        return reversedList;
+    private Map<String, String> constructDefaultListKeyValue(String listName) {
+        return Map.of("name",  listName);
     }
 }
 
