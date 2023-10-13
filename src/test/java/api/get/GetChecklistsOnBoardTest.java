@@ -20,7 +20,7 @@ public class GetChecklistsOnBoardTest extends BaseTest {
     @BeforeMethod
     public void createBoard() {
         ID_BOARD = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-        LIST_ID = listTestRestClient.createList("TestList", ID_BOARD).getId();
+        LIST_ID = listTestRestClient.createList(constructDefaultBoardKeyValue(), ID_BOARD).getId();
         CARD_ID = cardTestRestClient.createCard(LIST_ID).getId();
         CHECKLIST_ID = checklistTestRestClient.createChecklist(CARD_ID).getId();
     }

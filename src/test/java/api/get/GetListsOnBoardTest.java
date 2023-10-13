@@ -23,7 +23,7 @@ public class GetListsOnBoardTest extends BaseTest {
     @BeforeMethod
     public void createBoard() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-        listNamesForCreate.forEach(name -> listTestRestClient.createList(name, boardId));
+        listNamesForCreate.forEach(name -> listTestRestClient.createList(constructDefaultListKeyValue(name), boardId));
     }
 
     @Test
@@ -41,6 +41,10 @@ public class GetListsOnBoardTest extends BaseTest {
 
     private Map<String, String> constructDefaultBoardKeyValue() {
         return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
+    }
+
+    private Map<String, String> constructDefaultListKeyValue(String listName) {
+        return Map.of("name",  listName);
     }
 }
 
