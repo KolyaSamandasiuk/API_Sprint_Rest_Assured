@@ -9,9 +9,9 @@ import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.Matchers.is;
 
-public class ChecklistClient extends AbstractBaseRestClient {
+public class ChecklistTestRestClient extends AbstractBaseRestClient {
 
-    public ChecklistClient(String url) {
+    public ChecklistTestRestClient(String url) {
         super(url);
     }
 
@@ -23,7 +23,6 @@ public class ChecklistClient extends AbstractBaseRestClient {
                 .post("/1/checklist")
                 .then()
                 .statusCode(HTTP_OK)
-                .log().all()
                 .extract().as(CreateChecklistResponse.class);
     }
 

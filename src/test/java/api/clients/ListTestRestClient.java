@@ -7,21 +7,24 @@ import io.restassured.common.mapper.TypeRef;
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
+import static java.net.HttpURLConnection.HTTP_OK;
 
-public class ListClient extends AbstractBaseRestClient {
+public class ListTestRestClient extends AbstractBaseRestClient {
 
-    public ListClient(String url) {
+    public ListTestRestClient(String url) {
         super(url);
     }
 
     public CreateListResponse createList(String listName, String boardId) {
         return given()
                 .spec(requestSpec)
-                .queryParams("name", listName)
+                .queryParam("name", listName)
                 .when()
                 .post("/1/boards/{id}/lists", boardId)
-                .then().log().all()
-                .extract().as(CreateListResponse.class);
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(CreateListResponse.class);
     }
 
     public List<ListsDataResponse> getLists(String boardId) {
@@ -29,6 +32,7 @@ public class ListClient extends AbstractBaseRestClient {
                 .spec(requestSpec)
                 .get("/1/boards/{id}/lists", boardId)
                 .then()
+                .statusCode(HTTP_OK)
                 .extract()
                 .as(new TypeRef<List<ListsDataResponse>>() {
                 });

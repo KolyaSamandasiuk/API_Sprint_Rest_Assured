@@ -1,15 +1,16 @@
 package api;
 
-import api.clients.BoardClient;
-import api.clients.CardClient;
-import api.clients.ChecklistClient;
-import api.clients.ListClient;
+import api.clients.BoardRestTestClient;
+import api.clients.CardTestRestClient;
+import api.clients.ChecklistTestRestClient;
+import api.clients.ListTestRestClient;
 
 import static api.Const.BASE_URL;
 
 public class BaseTest {
-    protected static BoardClient boardClient = new BoardClient(BASE_URL);
-    protected static ListClient listClient = new ListClient(BASE_URL);
-    protected static CardClient cardClient = new CardClient(BASE_URL);
-    protected static ChecklistClient checklistClient = new ChecklistClient(BASE_URL);
+
+    protected static BoardRestTestClient boardRestTestClient = new BoardRestTestClient(BASE_URL);
+    protected static ListTestRestClient listTestRestClient = new ListTestRestClient(BASE_URL);
+    protected static CardTestRestClient cardTestRestClient = new CardTestRestClient(BASE_URL);
+    protected static ChecklistTestRestClient checklistTestRestClient = new ChecklistTestRestClient(BASE_URL);
 }

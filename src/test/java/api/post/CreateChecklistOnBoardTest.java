@@ -1,10 +1,10 @@
 package api.post;
 
 import api.BaseTest;
-import api.clients.BoardClient;
-import api.clients.CardClient;
-import api.clients.ChecklistClient;
-import api.clients.ListClient;
+import api.clients.BoardRestTestClient;
+import api.clients.CardTestRestClient;
+import api.clients.ChecklistTestRestClient;
+import api.clients.ListTestRestClient;
 import api.dto.CreateChecklistResponse;
 import jdk.jfr.Description;
 import org.testng.Assert;
@@ -21,12 +21,11 @@ public class CreateChecklistOnBoardTest extends BaseTest {
     public String ID_BOARD;
     public String ID_LIST;
     public String ID_CARD;
-    public String ID_CHECKLIST;
 
-    private BoardClient boardClient = new BoardClient(BASE_URL);
-    private ListClient listClient = new ListClient(BASE_URL);
-    private CardClient cardClient = new CardClient(BASE_URL);
-    private ChecklistClient checklistClient = new ChecklistClient(BASE_URL);
+    private BoardRestTestClient boardClient = new BoardRestTestClient(BASE_URL);
+    private ListTestRestClient listClient = new ListTestRestClient(BASE_URL);
+    private CardTestRestClient cardClient = new CardTestRestClient(BASE_URL);
+    private ChecklistTestRestClient checklistClient = new ChecklistTestRestClient(BASE_URL);
 
     @BeforeMethod
     public void stepsCreation() {
