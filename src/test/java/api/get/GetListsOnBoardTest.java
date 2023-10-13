@@ -2,6 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.ListsDataResponse;
+import jdk.jfr.Description;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -27,7 +28,8 @@ public class GetListsOnBoardTest extends BaseTest {
         getReversedSubListNames(expectedListNames).forEach(name -> listTestRestClient.createList(name, boardId));
     }
 
-    @Test
+    @Test(description = "AS2-20")
+    @Description("Getting information about lists on board")
     public void getListsOnBoard() {
         List<String> listNames = listTestRestClient.getLists(boardId).stream().map(ListsDataResponse::getName).collect(Collectors.toList());
 

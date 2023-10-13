@@ -3,6 +3,7 @@ package api.clients;
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
@@ -43,6 +44,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
+    @Step("Extracting information from the board by id: {0}")
     public BoardDataResponse getBoardById(String boardId) {
         return given()
                 .spec(requestSpec)
