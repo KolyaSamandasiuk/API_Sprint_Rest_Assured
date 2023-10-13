@@ -5,6 +5,7 @@ import api.dto.CreateBoardResponse;
 import api.dto.ListsDataResponse;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import io.restassured.response.ValidatableResponse;
 
@@ -43,11 +44,28 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
+    public ValidatableResponse deleteBoard(String boardId) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .delete("/1/boards/{id}", boardId)
+                .then()
+                .statusCode(HTTP_OK);
+    }
+
     public BoardDataResponse getBoardById(String boardId) {
+        return getBoardById(boardId, HTTP_OK)
+                .as(BoardDataResponse.class);
+    }
+
+    public Response getBoardById(String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
                 .get("/1/boards/{id}", boardId)
                 .then()
-                .extract().as(BoardDataResponse.class);
+                .statusCode(statusCode)
+                .extract()
+                .response();
     }
+
 }
