@@ -13,7 +13,6 @@ import java.util.Map;
 import static api.Const.BASE_URL;
 
 public class CreateANewBoard extends BaseTest {
-    private BoardRestTestClient boardRestTestClient = new BoardRestTestClient(BASE_URL);
     private String ID_BOARD;
 
     @Test

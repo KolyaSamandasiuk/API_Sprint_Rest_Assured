@@ -13,7 +13,6 @@ import static api.Const.BASE_URL;
 
 public class DeleteABoardTest extends BaseTest {
 
-    private BoardRestTestClient boardRestTestClient = new BoardRestTestClient(BASE_URL);
     private String ID_BOARD;
 
     @Test
