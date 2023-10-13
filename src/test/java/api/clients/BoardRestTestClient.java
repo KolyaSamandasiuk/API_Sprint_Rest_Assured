@@ -45,8 +45,6 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId)
                 .then()
                 .extract().as(BoardDataResponse.class);
-
-
     }
 
 public Response getBoardId(String boardId) {
