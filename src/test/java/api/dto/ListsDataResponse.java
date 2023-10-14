@@ -12,5 +12,4 @@ public class ListsDataResponse {
     private Integer pos;
     private String softLimit;
     private String idBoard;
-    private Boolean subscribed;
 }
