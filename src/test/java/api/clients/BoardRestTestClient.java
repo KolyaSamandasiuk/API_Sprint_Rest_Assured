@@ -44,7 +44,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
-    @Step("Extracting information from the board by id: {0}")
+    @Step("Extracting information from the board by id: {boardId}")
     public BoardDataResponse getBoardById(String boardId) {
         return given()
                 .spec(requestSpec)

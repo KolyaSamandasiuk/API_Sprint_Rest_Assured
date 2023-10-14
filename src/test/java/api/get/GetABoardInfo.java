@@ -2,8 +2,8 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.BoardDataResponse;
+import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
