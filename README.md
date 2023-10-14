@@ -5,5 +5,5 @@
 ##### Run tests
 example:
 ```bash
-mvn -DsuiteXmlFile=smokeSuite.xml test
+mvn -DsuiteXmlFile=allTestsSuite.xml test
 ```

@@ -1,9 +1,13 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
-<suite name="smokeSuite">
+<suite name="AllTestSuite">
     <test name="getTests">
         <classes>
             <class name="api.get.GetABoardInfo" />
             <class name="api.get.GetListsOnBoardTest" />
+        </classes>
+    </test>
+    <test name="postTests">
+        <classes>
             <class name="api.post.CreateANewBoard" />
         </classes>
     </test>
