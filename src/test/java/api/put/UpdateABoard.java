@@ -32,7 +32,6 @@ public class UpdateABoard extends BaseTest {
 
         boardParams.put("name", CHANGED_NAME_VALUE);
         boardParams.put("desc", CHANGED_DESC_VALUE);
-
         BoardDataResponse response = boardRestTestClient.putBoardInfo(ID_BOARD, boardParams);
 
         Assert.assertEquals(CHANGED_NAME_VALUE, response.getName());
