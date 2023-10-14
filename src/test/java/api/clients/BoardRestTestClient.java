@@ -2,15 +2,8 @@ package api.clients;
 
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
-<<<<<<< HEAD
-import api.dto.ListsDataResponse;
 import io.qameta.allure.Step;
-import io.restassured.common.mapper.TypeRef;
-import io.restassured.path.json.JsonPath;
-import org.testng.Assert;
-=======
 import io.restassured.response.Response;
->>>>>>> a1178dd3852d1c955b1ee2f9562093a6db8f93a8
 import io.restassured.response.ValidatableResponse;
 
 import java.util.Map;
@@ -56,9 +49,9 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(BoardDataResponse.class);
     }
 
-public Response getBoardId(String boardId) {
-    return given()
-            .spec(requestSpec)
-            .get("/1/boards/{id}", boardId);
+    public Response getBoardId(String boardId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/boards/{id}", boardId);
     }
 }
