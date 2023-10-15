@@ -12,10 +12,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class UpdateABoard extends BaseTest {
-    private String NAME_VALUE = "Test board";
-    private String DESC_VALUE = "Decription is empty";
-    private String CHANGED_NAME_VALUE = "Test board";
-    private String CHANGED_DESC_VALUE = "Decription is empty";
+    private final String NAME_VALUE = "Test board";
+    private final String DESC_VALUE = "Decription is empty";
+    private final String CHANGED_NAME_VALUE = "Test board";
+    private final String CHANGED_DESC_VALUE = "Decription is empty";
 
 
     Map<String, String> boardParams = new HashMap<>();
