@@ -14,12 +14,12 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    public List<CreateLabelResponse> getLabelOnABoard(String BoardId) {
+    public List<CreateLabelResponse> getLabelOnABoard(String boardId) {
         return given()
                 .spec(requestSpec)
                 .when()
                 .log().all()
-                .get("/1/boards/{id}/labels", BoardId)
+                .get("/1/boards/{id}/labels", boardId)
                 .then()
                 .statusCode(HTTP_OK)
                 .extract()

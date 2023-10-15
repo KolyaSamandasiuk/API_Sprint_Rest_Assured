@@ -8,6 +8,7 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -15,7 +16,6 @@ import java.util.stream.Collectors;
 
 public class GetALabelsOnBoardTest extends BaseTest {
     private String boardId;
-
     @BeforeMethod
     public void createBoard() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
@@ -24,7 +24,9 @@ public class GetALabelsOnBoardTest extends BaseTest {
     @Test
     public void getLabelsOnBoard() {
         List<String> labelNames = labelRestTestClient.getLabelOnABoard(boardId).stream().map(CreateLabelResponse::getColor).collect(Collectors.toList());
+        List<String> expectedLabelColors = Arrays.asList("blue", "green", "orange", "purple", "red", "yellow");
         Assert.assertFalse(labelNames.isEmpty(), "Label list is empty.");
+        Assert.assertTrue(labelNames.containsAll(expectedLabelColors), "Not all expected label colors are found.");
     }
 
     @AfterMethod
