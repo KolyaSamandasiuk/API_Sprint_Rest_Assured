@@ -1,15 +1,15 @@
 package api.post;
 
 import api.BaseTest;
-import api.dto.AddNewCommentToCardResponse;
-import io.restassured.response.Response;
+import api.dto.CommentDto;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
 
-import java.util.List;
 import java.util.Map;
+
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class AddNewCommentToCardTest extends BaseTest {
 
@@ -27,9 +27,10 @@ public class AddNewCommentToCardTest extends BaseTest {
 
     @Test
     public void addCommentToCard(){
+        CommentDto response = cardsTestRestClient.addNewCommentToCard(constructDefaultCommentKeyValue(), idCard);
 
-      AddNewCommentToCardResponse response = cardsTestRestClient.addNewCommentToCard(constructDefaultCommentKeyValue("Test comment"), idCard);
-
+        assertThat(response.getData().getText()).isEqualTo(constructDefaultCommentKeyValue().get("text"));
+        assertThat(response.getDisplay().getEntities().getComment().getText()).isEqualTo(constructDefaultCommentKeyValue().get("text"));
     }
 
     @AfterMethod
@@ -44,7 +45,7 @@ public class AddNewCommentToCardTest extends BaseTest {
         return Map.of("name",  listName);
     }
 
-    private Map<String, String> constructDefaultCommentKeyValue(String comment) {
-        return Map.of("text",  comment);
+    private Map<String, String> constructDefaultCommentKeyValue() {
+        return Map.of("text", "Test comment");
     }
 }

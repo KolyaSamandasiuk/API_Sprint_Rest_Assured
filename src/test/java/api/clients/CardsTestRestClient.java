@@ -1,10 +1,8 @@
 package api.clients;
 
-import api.dto.AddNewCommentToCardResponse;
+import api.dto.CommentDto;
 import api.dto.CreateCardDataResponse;
 
-import java.net.MulticastSocket;
-import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -28,13 +26,13 @@ public class CardsTestRestClient extends AbstractBaseRestClient {
                 .as(CreateCardDataResponse.class);
     }
 
-    public AddNewCommentToCardResponse addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
+    public CommentDto addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
         return given()
                 .spec(requestSpec)
                 .queryParams(commentKeyValue)
                 .post("/1/cards/{id}/actions/comments", idCard)
                 .then()
                 .statusCode(HTTP_OK)
-                .extract().as(AddNewCommentToCardResponse.class);
+                .extract().as(CommentDto.class);
     }
 }
