@@ -19,7 +19,6 @@ public class GetABoardInfo extends BaseTest {
     public String ID_BOARD;
 
     @BeforeMethod
-    @Step("Creating a test board")
     public void createBoard() {
         ID_BOARD = boardRestTestClient.createNewBoard(Map.of("name", NAME_VALUE, "desc", DESC_VALUE)).getId();
     }

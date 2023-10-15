@@ -20,6 +20,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a test board")
     public CreateBoardResponse createNewBoard(Map<String, String> createBoardKeyValue) {
         return given()
                 .spec(requestSpec)
@@ -53,5 +54,16 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
         return given()
                 .spec(requestSpec)
                 .get("/1/boards/{id}", boardId);
+    }
+
+    public BoardDataResponse putBoardInfo(String boardId,Map<String, String> infoToBoard) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToBoard)
+                .when()
+                .put("/1/boards/{id}", boardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(BoardDataResponse.class);
     }
 }

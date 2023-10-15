@@ -2,6 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Step;
 import jdk.jfr.Description;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterMethod;

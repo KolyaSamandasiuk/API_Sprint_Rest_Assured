@@ -9,6 +9,12 @@
     <test name="postTests">
         <classes>
             <class name="api.post.CreateANewBoard" />
+            <class name="api.post.CreateAListOnBoardTest" />
+        </classes>
+    </test>
+    <test name="putTests">
+        <classes>
+            <class name="api.put.UpdateABoard" />
         </classes>
     </test>
 </suite>
