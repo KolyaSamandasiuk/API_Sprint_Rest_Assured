@@ -24,7 +24,6 @@ public class GetALabelsOnBoardTest extends BaseTest {
     @Test
     public void getLabelsOnBoard() {
         List<String> labelNames = labelRestTestClient.getLabelOnABoard(boardId).stream().map(CreateLabelResponse::getColor).collect(Collectors.toList());
-        System.out.println(labelNames);
         Assert.assertFalse(labelNames.isEmpty(), "Label list is empty.");
     }
 
