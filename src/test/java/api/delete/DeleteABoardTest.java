@@ -1,15 +1,12 @@
 package api.delete;
 
 import api.BaseTest;
-import api.clients.BoardRestTestClient;
 import api.dto.CreateBoardResponse;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static api.Const.BASE_URL;
 
 public class DeleteABoardTest extends BaseTest {
 
