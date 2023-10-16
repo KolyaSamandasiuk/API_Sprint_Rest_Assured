@@ -1,7 +1,6 @@
 package api.clients;
 
 import api.dto.CardDataResponse;
-import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import java.util.Map;
@@ -18,20 +17,14 @@ public class CardTestRestClient extends AbstractBaseRestClient {
     }
 
     public CardDataResponse createCard(Map<String, String> listKeyValue, String idList) {
-        return createCard(listKeyValue, idList, HTTP_OK)
-                .as(CardDataResponse.class);
-    }
-
-    public Response createCard(Map<String, String> listKeyValue, String idList, int statusCode) {
         return given()
                 .spec(requestSpec)
                 .queryParams(listKeyValue)
                 .when()
                 .post("/1/cards?idList={id}", idList)
                 .then()
-                .statusCode(statusCode)
-                .extract()
-                .response();
+                .statusCode(HTTP_OK)
+                .extract().as(CardDataResponse.class);
     }
 
     public ValidatableResponse deleteCardIfExist(String cardId) {

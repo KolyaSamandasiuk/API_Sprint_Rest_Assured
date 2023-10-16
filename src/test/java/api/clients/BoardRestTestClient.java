@@ -47,13 +47,13 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(BoardDataResponse.class);
     }
 
-public Response getBoardId(String boardId) {
-    return given()
-            .spec(requestSpec)
-            .get("/1/boards/{id}", boardId);
+    public Response getBoardId(String boardId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/boards/{id}", boardId);
     }
 
-    public BoardDataResponse putBoardInfo(String boardId,Map<String, String> infoToBoard) {
+    public BoardDataResponse putBoardInfo(String boardId, Map<String, String> infoToBoard) {
         return given()
                 .spec(requestSpec)
                 .body(infoToBoard)

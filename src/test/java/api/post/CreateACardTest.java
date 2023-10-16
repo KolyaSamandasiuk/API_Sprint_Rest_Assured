@@ -12,18 +12,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class CreateACardTest extends BaseTest {
-
     private String idBoard;
     private String idList;
     private String idCard;
 
     @BeforeClass
-    public void createBoard() {
+    public void createListOnABoard() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-    }
-
-    @BeforeClass
-    public void createList() {
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
     }
 
@@ -40,7 +35,6 @@ public class CreateACardTest extends BaseTest {
         Assert.assertNotNull(response.getId(), "Card ID is null");
         Assert.assertEquals(response.getName(), "New Test Card", "Card name doesn't match");
         Assert.assertEquals(response.getDesc(), "The description for the Test Card", "Card description is empty");
-
     }
 
     @AfterClass
