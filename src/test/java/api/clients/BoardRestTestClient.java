@@ -52,4 +52,15 @@ public Response getBoardId(String boardId) {
             .spec(requestSpec)
             .get("/1/boards/{id}", boardId);
     }
+
+    public BoardDataResponse putBoardInfo(String boardId,Map<String, String> infoToBoard) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToBoard)
+                .when()
+                .put("/1/boards/{id}", boardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(BoardDataResponse.class);
+    }
 }
