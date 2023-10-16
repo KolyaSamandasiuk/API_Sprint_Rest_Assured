@@ -47,6 +47,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                     .as(new TypeRef<List<CreateLabelResponse>>() {
                     });
         }
+
     public CreateLabelResponse getLabel (String labelId){
         return given()
                 .spec(requestSpec)
