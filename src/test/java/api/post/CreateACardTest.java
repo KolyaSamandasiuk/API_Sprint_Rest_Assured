@@ -2,6 +2,7 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.CardDataResponse;
+import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -26,7 +27,8 @@ public class CreateACardTest extends BaseTest {
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
     }
 
-    @Test
+    @Test(description = "AS2-12")
+    @Description("Create a Card")
     public void createСard() {
         Map<String, String> cardParams = new HashMap<>();
         cardParams.put("name", CARD_NAME);

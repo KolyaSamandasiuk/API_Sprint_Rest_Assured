@@ -3,7 +3,7 @@
 
 
 ##### Run tests
-example:
+All Royko tests:
 ```bash
-mvn -DsuiteXmlFile=allTestsSuite.xml test
+mvn -DsuiteXmlFile=roykoSuite.xml test
 ```

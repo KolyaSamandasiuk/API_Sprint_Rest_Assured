@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class GetABoardInfo extends BaseTest {
 
-    private String NAME_VALUE = "Test board";
-    private String DESC_VALUE = "Decription is empty";
+    private final String NAME_VALUE = "Test board";
+    private final String DESC_VALUE = "Decription is empty";
 
     public String ID_BOARD;
 
