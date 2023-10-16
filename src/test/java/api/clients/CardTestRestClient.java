@@ -3,10 +3,13 @@ package api.clients;
 import api.dto.CardDataResponse;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.Matchers.is;
 
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_OK;
 
 public class CardTestRestClient extends AbstractBaseRestClient {
@@ -26,13 +29,13 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().as(CardDataResponse.class);
     }
 
-    public ValidatableResponse deleteCart(String listId) {
+    public ValidatableResponse deleteCardIfExist(String cardId) {
         return given()
                 .spec(requestSpec)
                 .when()
-                .delete("/1/cards/{id}", listId)
+                .delete("/1/cards/{id}", cardId)
                 .then()
-                .statusCode(HTTP_OK);
+                .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
     public static Map<String, String> constructDefaultListKeyValue() {

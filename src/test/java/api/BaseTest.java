@@ -1,8 +1,8 @@
 package api;
 
 import api.clients.BoardRestTestClient;
-import api.clients.LabelRestTestClient;
 import api.clients.CardTestRestClient;
+import api.clients.LabelRestTestClient;
 import api.clients.ChecklistTestRestClient;
 import api.clients.ListTestRestClient;
 

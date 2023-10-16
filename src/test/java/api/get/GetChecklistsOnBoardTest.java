@@ -36,7 +36,7 @@ public class GetChecklistsOnBoardTest extends BaseTest {
 
     @AfterMethod
     public void delete() {
-        cardTestRestClient.deleteCart(card_id);
+        cardTestRestClient.deleteCardIfExist(card_id);
         boardRestTestClient.deleteBoardIfExist(id_board);
     }
 }
