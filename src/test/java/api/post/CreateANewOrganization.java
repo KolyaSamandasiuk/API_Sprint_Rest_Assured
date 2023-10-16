@@ -17,7 +17,7 @@ public class CreateANewOrganization extends BaseTest {
         OrganizationDataResponse response = organizationRestTestClient.createNewOrganization(organizationName);
         ID_ORGANIZATION = response.getId();
 
-        Assert.assertNotNull(response.getId(), "Board ID is null");
+        Assert.assertNotNull(response.getId(), "Organization ID is null");
     }
 
     @AfterMethod
