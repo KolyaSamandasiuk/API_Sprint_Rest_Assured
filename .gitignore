@@ -2,6 +2,9 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+/src/test/resources/application.conf
+.allure
+.allure/
 
 ### IntelliJ IDEA ###
 .idea/modules.xml
@@ -13,6 +16,7 @@ target/
 *.iml
 *.ipr
 .idea
+.idea/
 
 ### Eclipse ###
 .apt_generated
