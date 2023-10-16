@@ -4,12 +4,10 @@ import api.BaseTest;
 import api.dto.CreateLabelResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
-import org.apache.commons.lang3.RandomStringUtils;
+import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-import org.testng.Assert;
-import java.util.Map;
 
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.LabelRestTestClient.constructDefaultListKeyValue;
@@ -28,7 +26,7 @@ public class CreateALabelOnBoardTest extends BaseTest {
     public void createLabelOnBoard() {
         String color = "blue";
         String name = "label1";
-        labelId = labelRestTestClient.createLabel(constructDefaultListKeyValue(name, color,boardId)).getId();
+        labelId = labelRestTestClient.createLabel(constructDefaultListKeyValue(name, color, boardId)).getId();
 
         CreateLabelResponse response = labelRestTestClient.getLabel(labelId);
 
