@@ -1,8 +1,6 @@
 package api.clients;
 
-import api.dto.BoardDataResponse;
 import api.dto.CreateLabelResponse;
-import api.dto.CreateListResponse;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 
@@ -37,7 +35,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                     .response();
         }
 
-        public List<CreateLabelResponse> getLabelOnABoard (String boardId){
+        public List<CreateLabelResponse> getLabelsOnABoard(String boardId){
             return given()
                     .spec(requestSpec)
                     .when()
@@ -58,4 +56,8 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .then()
                 .extract().as(CreateLabelResponse.class);
     }
+
+    public static Map<String, String> constructDefaultListKeyValue(String labelName,String labelColor,String idBoard) {
+        return Map.of("name",  labelName,"color",labelColor,"idBoard",idBoard) ;
     }
+}

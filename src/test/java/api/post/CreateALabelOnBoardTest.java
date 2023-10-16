@@ -9,6 +9,9 @@ import org.testng.annotations.Test;
 import org.testng.Assert;
 import java.util.Map;
 
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
+import static api.clients.LabelRestTestClient.constructDefaultListKeyValue;
+
 public class CreateALabelOnBoardTest extends BaseTest {
     private String boardId;
     private String labelId;
@@ -32,12 +35,5 @@ public class CreateALabelOnBoardTest extends BaseTest {
     @AfterMethod
     public void delete() {
         boardRestTestClient.deleteBoardIfExist(boardId);
-    }
-    private Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
-    }
-
-    private Map<String, String> constructDefaultListKeyValue(String labelName,String labelColor,String idBoard) {
-        return Map.of("name",  labelName,"color",labelColor,"idBoard",idBoard) ;
     }
 }
