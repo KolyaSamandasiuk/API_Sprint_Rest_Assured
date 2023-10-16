@@ -36,6 +36,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .then()
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
+
     public Response getCardId(String cardId) {
         return given()
                 .spec(requestSpec)

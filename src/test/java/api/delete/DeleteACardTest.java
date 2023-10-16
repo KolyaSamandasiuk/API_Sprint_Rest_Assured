@@ -3,6 +3,7 @@ package api.delete;
 import api.BaseTest;
 import api.dto.CardDataResponse;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -41,5 +42,10 @@ public class DeleteACardTest extends BaseTest {
                 .asString();
 
         Assert.assertEquals(cardMessage, "The requested resource was not found.");
+    }
+
+    @AfterClass
+    public void deleteBoard() {
+        cardTestRestClient.deleteCardIfExist(idCard);
     }
 }
