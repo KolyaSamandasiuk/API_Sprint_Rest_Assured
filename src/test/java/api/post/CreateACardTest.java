@@ -17,6 +17,8 @@ public class CreateACardTest extends BaseTest {
     private String idBoard;
     private String idList;
     private String idCard;
+    private static final String CARD_NAME = "New Test Card";
+    private static final String DESCRIPTION_OF_CARD = "The description for the Test Card";
 
     @BeforeClass
     public void createListOnABoard() {
@@ -27,14 +29,12 @@ public class CreateACardTest extends BaseTest {
     @Test
     public void createСard() {
         Map<String, String> cardParams = new HashMap<>();
-        cardParams.put("name", "New Test Card");
-        cardParams.put("desc", "The description for the Test Card");
+        cardParams.put("name", CARD_NAME);
+        cardParams.put("desc", DESCRIPTION_OF_CARD);
 
         CardDataResponse response = cardTestRestClient.createCard(cardParams, idList);
         idCard = response.getId();
 
-        Assert.assertNotNull(response, "Card creation failed");
-        Assert.assertNotNull(response.getId(), "Card ID is null");
         Assert.assertEquals(response.getName(), "New Test Card", "Card name doesn't match");
         Assert.assertEquals(response.getDesc(), "The description for the Test Card", "Card description is empty");
     }
