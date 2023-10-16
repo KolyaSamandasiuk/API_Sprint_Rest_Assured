@@ -54,7 +54,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId);
     }
 
-    public BoardDataResponse putBoardInfo(String boardId,Map<String, String> infoToBoard) {
+    public BoardDataResponse putBoardInfo(String boardId, Map<String, String> infoToBoard) {
         return given()
                 .spec(requestSpec)
                 .body(infoToBoard)
@@ -64,6 +64,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(HTTP_OK)
                 .extract().as(BoardDataResponse.class);
     }
+
     public static Map<String, String> constructDefaultBoardKeyValue() {
         return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(2));
     }
