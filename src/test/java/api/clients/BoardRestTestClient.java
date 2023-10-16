@@ -4,6 +4,7 @@ import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
@@ -53,7 +54,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId);
     }
 
-    public BoardDataResponse putBoardInfo(String boardId, Map<String, String> infoToBoard) {
+    public BoardDataResponse putBoardInfo(String boardId,Map<String, String> infoToBoard) {
         return given()
                 .spec(requestSpec)
                 .body(infoToBoard)
@@ -62,5 +63,8 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .then()
                 .statusCode(HTTP_OK)
                 .extract().as(BoardDataResponse.class);
+    }
+    public static Map<String, String> constructDefaultBoardKeyValue() {
+        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(2));
     }
 }

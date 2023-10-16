@@ -2,7 +2,6 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.CardDataResponse;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
@@ -10,6 +9,9 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
+import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
 public class CreateACardTest extends BaseTest {
     private String idBoard;
@@ -40,13 +42,5 @@ public class CreateACardTest extends BaseTest {
     @AfterClass
     public void deleteBoard() {
         cardTestRestClient.deleteCardIfExist(idCard);
-    }
-
-    private Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(5));
-    }
-
-    private Map<String, String> constructDefaultListKeyValue() {
-        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(5));
     }
 }
