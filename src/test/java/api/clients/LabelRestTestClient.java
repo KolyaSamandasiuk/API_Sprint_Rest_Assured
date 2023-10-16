@@ -1,5 +1,6 @@
 package api.clients;
 
+import api.dto.BoardDataResponse;
 import api.dto.CreateLabelResponse;
 import api.dto.CreateListResponse;
 import io.restassured.common.mapper.TypeRef;
@@ -48,4 +49,13 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                     .as(new TypeRef<List<CreateLabelResponse>>() {
                     });
         }
+    public CreateLabelResponse getLabel (String labelId){
+        return given()
+                .spec(requestSpec)
+                .when()
+                .log().all()
+                .get("/1/labels/{id}", labelId)
+                .then()
+                .extract().as(CreateLabelResponse.class);
+    }
     }
