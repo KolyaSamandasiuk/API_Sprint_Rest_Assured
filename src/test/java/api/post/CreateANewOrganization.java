@@ -21,7 +21,8 @@ public class CreateANewOrganization extends BaseTest {
     }
 
     @AfterMethod
-    public void deleteBoard() {
-        boardRestTestClient.deleteBoardIfExist(ID_ORGANIZATION);
+    public void deleteOrganization() {
+        organizationRestTestClient.deleteOrganizationIfExist(ID_ORGANIZATION);
     }
+
 }
