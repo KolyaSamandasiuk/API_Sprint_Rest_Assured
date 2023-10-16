@@ -17,6 +17,9 @@ public class CardTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    private static String NAME_VALUE = "Test card";
+    private static String DESC_VALUE = "Description of Test card";
+
     public CardDataResponse createCard(Map<String, String> listKeyValue, String idList) {
         return given()
                 .spec(requestSpec)
@@ -37,9 +40,21 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
-    public Response getCardInfoByCardId(String cardId) {
+    public Response getCardId(String cardId) {
         return given()
                 .spec(requestSpec)
                 .get("/1/cards/{id}", cardId);
+    }
+
+    public CardDataResponse getCardById(String cardId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/cards/{id}", cardId)
+                .then()
+                .extract().as(CardDataResponse.class);
+    }
+
+    public static Map<String, String> constructDefaultCardKeyValue() {
+        return Map.of("name", NAME_VALUE, "desc", DESC_VALUE);
     }
 }
