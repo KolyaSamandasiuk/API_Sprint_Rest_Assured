@@ -15,8 +15,6 @@ import static api.clients.LabelRestTestClient.constructDefaultListKeyValue;
 public class CreateALabelOnBoardTest extends BaseTest {
     private String boardId;
     private String labelId;
-    private String color = "blue";
-    private String name = "label1";
 
     @BeforeMethod
     public void createBoard() {
@@ -25,11 +23,14 @@ public class CreateALabelOnBoardTest extends BaseTest {
 
     @Test
     public void createLabelOnBoard() {
-         labelId = labelRestTestClient.createLabel(constructDefaultListKeyValue(name,color,boardId)).getId();
-         CreateLabelResponse response = labelRestTestClient.getLabel(labelId);
+        String color = "blue";
+        String name = "label1";
+        labelId = labelRestTestClient.createLabel(constructDefaultListKeyValue(name, color,boardId)).getId();
 
-         Assert.assertEquals(name, response.getName());
-         Assert.assertEquals(color, response.getColor());
+        CreateLabelResponse response = labelRestTestClient.getLabel(labelId);
+
+        Assert.assertEquals(name, response.getName());
+        Assert.assertEquals(color, response.getColor());
     }
 
     @AfterMethod
