@@ -18,7 +18,7 @@ public class DeleteACardTest extends BaseTest {
     private String idBoard;
     private String idList;
     private String idCard;
-    private static final String CARD_NAME = "New Test Card";
+    private static String CARD_NAME = "New Test Card";
 
     @BeforeClass
     public void createListOnABoard() {

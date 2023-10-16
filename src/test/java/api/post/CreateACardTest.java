@@ -17,8 +17,8 @@ public class CreateACardTest extends BaseTest {
     private String idBoard;
     private String idList;
     private String idCard;
-    private static final String CARD_NAME = "New Test Card";
-    private static final String DESCRIPTION_OF_CARD = "The description for the Test Card";
+    private static String CARD_NAME = "New Test Card";
+    private static String DESCRIPTION_OF_CARD = "The description for the Test Card";
 
     @BeforeClass
     public void createListOnABoard() {
