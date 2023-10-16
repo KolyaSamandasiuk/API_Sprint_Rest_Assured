@@ -2,6 +2,7 @@ package api.clients;
 
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,6 +21,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a test board")
     public CreateBoardResponse createNewBoard(Map<String, String> createBoardKeyValue) {
         return given()
                 .spec(requestSpec)
@@ -40,6 +42,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
+    @Step("Extracting information from the board by id: {boardId}")
     public BoardDataResponse getBoardById(String boardId) {
         return given()
                 .spec(requestSpec)
