@@ -2,6 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.CreateLabelResponse;
+import jdk.jfr.Description;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -20,7 +21,8 @@ public class GetALabelsOnBoardTest extends BaseTest {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
     }
 
-    @Test
+    @Test(description = "AS2-15")
+    @Description("Get Labels on a Board")
     public void getLabelsOnBoard() {
         List<String> labelNames = labelRestTestClient.getLabelsOnABoard(boardId).stream().map(CreateLabelResponse::getColor).collect(Collectors.toList());
         List<String> expectedLabelColors = List.of("blue", "green", "orange", "purple", "red", "yellow");

@@ -1,6 +1,7 @@
 package api.clients;
 
 import api.dto.CardDataResponse;
+import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 
 import java.util.Map;
@@ -34,5 +35,11 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .delete("/1/cards/{id}", cardId)
                 .then()
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
+    }
+
+    public Response getCardInfoByCardId(String cardId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/cards/{id}", cardId);
     }
 }
