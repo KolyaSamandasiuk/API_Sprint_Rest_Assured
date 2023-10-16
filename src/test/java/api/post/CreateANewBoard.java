@@ -1,7 +1,6 @@
 package api.post;
 
 import api.BaseTest;
-import api.clients.BoardRestTestClient;
 import api.dto.CreateBoardResponse;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,8 +8,6 @@ import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static api.Const.BASE_URL;
 
 public class CreateANewBoard extends BaseTest {
     private String ID_BOARD;

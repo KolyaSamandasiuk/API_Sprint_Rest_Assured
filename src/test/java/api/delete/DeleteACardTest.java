@@ -1,4 +1,4 @@
-package api.post;
+package api.delete;
 
 import api.BaseTest;
 import api.dto.CardDataResponse;
@@ -13,12 +13,12 @@ import java.util.Map;
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
-public class CreateACardTest extends BaseTest {
+public class DeleteACardTest extends BaseTest {
+
     private String idBoard;
     private String idList;
     private String idCard;
     private static String CARD_NAME = "New Test Card";
-    private static String DESCRIPTION_OF_CARD = "The description for the Test Card";
 
     @BeforeClass
     public void createListOnABoard() {
@@ -27,16 +27,21 @@ public class CreateACardTest extends BaseTest {
     }
 
     @Test
-    public void createСard() {
+    public void deleteCardTest() {
         Map<String, String> cardParams = new HashMap<>();
         cardParams.put("name", CARD_NAME);
-        cardParams.put("desc", DESCRIPTION_OF_CARD);
 
         CardDataResponse response = cardTestRestClient.createCard(cardParams, idList);
         idCard = response.getId();
 
-        Assert.assertEquals(response.getName(), CARD_NAME, "Card name doesn't match");
-        Assert.assertEquals(response.getDesc(), DESCRIPTION_OF_CARD, "Card description is empty");
+        cardTestRestClient.deleteCardIfExist(idCard);
+
+        String cardMessage = cardTestRestClient
+                .getCardInfoByCardId(idCard)
+                .body()
+                .asString();
+
+        Assert.assertEquals(cardMessage, "The requested resource was not found.");
     }
 
     @AfterClass
