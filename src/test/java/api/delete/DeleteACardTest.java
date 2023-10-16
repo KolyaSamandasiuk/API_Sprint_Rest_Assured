@@ -37,7 +37,7 @@ public class DeleteACardTest extends BaseTest {
         cardTestRestClient.deleteCardIfExist(idCard);
 
         String cardMessage = cardTestRestClient
-                .getCardId(idCard)
+                .getCardInfoByCardId(idCard)
                 .body()
                 .asString();
 
