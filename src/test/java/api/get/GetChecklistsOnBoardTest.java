@@ -2,13 +2,13 @@ package api.get;
 
 import api.BaseTest;
 import jdk.jfr.Description;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.Map;
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
+import static api.clients.CardTestRestClient.constructDefaultListKeyValue;
 
 public class GetChecklistsOnBoardTest extends BaseTest {
 
@@ -21,7 +21,7 @@ public class GetChecklistsOnBoardTest extends BaseTest {
     public void createBoard() {
         id_board = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         list_id = listTestRestClient.createList(constructDefaultBoardKeyValue(), id_board).getId();
-        card_id = cardTestRestClient.createCard(list_id).getId();
+        card_id = cardTestRestClient.createCard(constructDefaultListKeyValue(),list_id).getId();
         checklist_id = checklistTestRestClient.createChecklist(card_id).getId();
     }
 
@@ -38,9 +38,5 @@ public class GetChecklistsOnBoardTest extends BaseTest {
     public void delete() {
         cardTestRestClient.deleteCart(card_id);
         boardRestTestClient.deleteBoardIfExist(id_board);
-    }
-
-    private Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 }
