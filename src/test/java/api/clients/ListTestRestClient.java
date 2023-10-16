@@ -4,6 +4,7 @@ import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -43,5 +44,9 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .extract()
                 .as(new TypeRef<List<ListsDataResponse>>() {
                 });
+    }
+
+    public static Map<String, String> constructDefaultListKeyValue() {
+        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(2));
     }
 }
