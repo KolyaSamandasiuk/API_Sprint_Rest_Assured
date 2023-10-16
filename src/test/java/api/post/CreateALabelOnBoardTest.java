@@ -2,6 +2,8 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.CreateLabelResponse;
+import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -21,7 +23,8 @@ public class CreateALabelOnBoardTest extends BaseTest {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
     }
 
-    @Test
+    @Test(description = "AS2-5")
+    @Description("Create a new label on a board")
     public void createLabelOnBoard() {
         String color = "blue";
         String name = "label1";
@@ -34,6 +37,7 @@ public class CreateALabelOnBoardTest extends BaseTest {
     }
 
     @AfterMethod
+    @Step("Delete the test board")
     public void delete() {
         boardRestTestClient.deleteBoardIfExist(boardId);
     }
