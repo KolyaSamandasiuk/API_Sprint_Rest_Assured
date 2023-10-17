@@ -33,6 +33,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateBoardResponse.class);
     }
 
+    @Step("Delete the test board")
     public ValidatableResponse deleteBoardIfExist(String boardId) {
         return given()
                 .spec(requestSpec)
