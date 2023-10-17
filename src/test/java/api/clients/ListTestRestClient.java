@@ -19,12 +19,13 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    @Step("Create list on Board , with parameters: Map<String, String> listKeyValue, String boardId ")
+    @Step("Create list on Board , with parameters: {listKeyValue},  boardId ")
     public CreateListResponse createList(Map<String, String> listKeyValue, String boardId) {
         return createList(listKeyValue, boardId, HTTP_OK)
                 .as(CreateListResponse.class);
     }
 
+    @Step("Creating new list by board id - {boardId}, with parameters - {listKeyValue}")
     public Response createList(Map<String, String> listKeyValue, String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
