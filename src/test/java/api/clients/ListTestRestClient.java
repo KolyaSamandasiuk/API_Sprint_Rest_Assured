@@ -1,6 +1,5 @@
 package api.clients;
 
-import api.dto.BoardDataResponse;
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
 import io.qameta.allure.Step;
