@@ -19,7 +19,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    @Step("Creating a new list")
+    @Step("Create list on Board , with parameters: {listKeyValue},  boardId ")
     public CreateListResponse createList(Map<String, String> listKeyValue, String boardId) {
         return createList(listKeyValue, boardId, HTTP_OK)
                 .as(CreateListResponse.class);
@@ -47,6 +47,18 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .extract()
                 .as(new TypeRef<List<ListsDataResponse>>() {
                 });
+    }
+
+    @Step("Move list with id: {listId} to board with id: {boardId}")
+    public ListsDataResponse moveList(String listId, String boardId) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .put("/1/lists/{listId}/idBoard?value={boardId}", listId, boardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(ListsDataResponse.class);
     }
 
     public static Map<String, String> constructDefaultListKeyValue() {
