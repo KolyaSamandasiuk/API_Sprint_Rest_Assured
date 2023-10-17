@@ -23,7 +23,6 @@ public class GetChecklistTest extends BaseTest {
     private String cardId;
     private String checklistId;
 
-
     @BeforeMethod
     @Step("Fulfillment of the prerequisites for the test")
     public void preconditions() {
@@ -45,5 +44,4 @@ public class GetChecklistTest extends BaseTest {
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(boardId);
     }
-
 }

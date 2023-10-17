@@ -26,6 +26,7 @@ public class ChecklistRestTestClient extends AbstractBaseRestClient {
                 .extract().as(ChecklistDataResponse.class);
     }
 
+    @Step("Getting information from checklist by ID")
     public ChecklistDataResponse getChecklistById(String checklistId) {
         return given()
                 .spec(requestSpec)
