@@ -5,6 +5,7 @@
             <class name="api.get.GetABoardInfo" />
             <class name="api.put.UpdateABoard" />
             <class name="api.post.CreateAChecklist" />
+            <class name="api.delete.DeleteAChecklistTest" />
         </classes>
     </test>
 </suite>
