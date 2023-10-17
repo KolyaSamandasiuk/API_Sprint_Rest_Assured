@@ -1,7 +1,7 @@
 package api.clients;
 
-import api.dto.CommentDto;
 import api.dto.CreateCardDataResponse;
+import io.restassured.response.Response;
 
 import java.util.Map;
 
@@ -26,13 +26,13 @@ public class CardsTestRestClient extends AbstractBaseRestClient {
                 .as(CreateCardDataResponse.class);
     }
 
-    public CommentDto addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
+    public Response addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
         return given()
                 .spec(requestSpec)
                 .queryParams(commentKeyValue)
                 .post("/1/cards/{id}/actions/comments", idCard)
                 .then()
                 .statusCode(HTTP_OK)
-                .extract().as(CommentDto.class);
+                .extract().response();
     }
 }
