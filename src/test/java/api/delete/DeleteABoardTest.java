@@ -2,6 +2,7 @@ package api.delete;
 
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -12,7 +13,8 @@ public class DeleteABoardTest extends BaseTest {
 
     private String idCard;
 
-    @Test
+    @Test(description = "AS2-10")
+    @Description("Positive: Delete a Board ")
     public void deleteBoardTest() {
         Map<String, String> boardParams = new HashMap<>();
         boardParams.put("name", "Test board");
