@@ -1,14 +1,9 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="AllTestSuite">
-    <test name="getTest">
+    <test name="Tests">
         <classes>
             <class name="api.get.GetALabelsOnBoardTest" />
-        </classes>
-    </test>
-    <test name="postTests">
-        <classes>
             <class name="api.post.CreateALabelOnBoardTest" />
         </classes>
     </test>
 </suite>
-

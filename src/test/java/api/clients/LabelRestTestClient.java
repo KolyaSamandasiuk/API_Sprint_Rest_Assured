@@ -12,7 +12,6 @@ import java.util.Map;
 import static io.restassured.RestAssured.given;
 import static java.net.HttpURLConnection.HTTP_OK;
 
-
 public class LabelRestTestClient extends AbstractBaseRestClient {
 
     public LabelRestTestClient(String url) {
@@ -37,7 +36,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .response();
     }
 
-    @Step("Extracting information about all label by id: {boardId}")
+    @Step("Extracting information about all labels by board id: {boardId}")
     public List<CreateLabelResponse> getLabelsOnABoard(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -51,7 +50,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 });
     }
 
-    @Step("Extracting information about label by id: {boardId}")
+    @Step("Extracting information about label by label id: {labelId}")
     public CreateLabelResponse getLabel(String labelId) {
         return given()
                 .spec(requestSpec)
@@ -62,11 +61,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateLabelResponse.class);
     }
 
-    public static Map<String, String> constructDefaultListKeyValue(String labelName, String labelColor, String idBoard) {
+    public static Map<String, String> constructDefaultLabelKeyValue(String labelName, String labelColor, String idBoard) {
         return Map.of("name", labelName, "color", labelColor, "idBoard", idBoard);
-    }
-
-    public static Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 }

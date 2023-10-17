@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static api.clients.LabelRestTestClient.constructDefaultBoardKeyValue;
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 
 
 public class GetALabelsOnBoardTest extends BaseTest {
@@ -28,12 +28,11 @@ public class GetALabelsOnBoardTest extends BaseTest {
         List<String> labelNames = labelRestTestClient.getLabelsOnABoard(boardId).stream().map(CreateLabelResponse::getColor).collect(Collectors.toList());
         List<String> expectedLabelColors = List.of("blue", "green", "orange", "purple", "red", "yellow");
 
-        Assert.assertFalse(labelNames.isEmpty(), "Label list is empty.");
+        Assert.assertEquals(labelNames.size(), expectedLabelColors.size(), "Number of labels does not match the expected number.");
         Assert.assertTrue(labelNames.containsAll(expectedLabelColors), "Not all expected label colors are found.");
     }
 
     @AfterMethod
-    @Step("Delete the test board")
     public void delete() {
         boardRestTestClient.deleteBoardIfExist(boardId);
     }
