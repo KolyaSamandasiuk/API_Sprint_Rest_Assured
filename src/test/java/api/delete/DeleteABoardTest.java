@@ -2,6 +2,7 @@ package api.delete;
 
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -10,20 +11,21 @@ import java.util.Map;
 
 public class DeleteABoardTest extends BaseTest {
 
-    private String ID_BOARD;
+    private String idCard;
 
-    @Test
+    @Test(description = "AS2-10")
+    @Description("Positive: Delete a Board ")
     public void deleteBoardTest() {
         Map<String, String> boardParams = new HashMap<>();
         boardParams.put("name", "Test board");
 
         CreateBoardResponse response = boardRestTestClient.createNewBoard(boardParams);
-        ID_BOARD = response.getId();
+        idCard = response.getId();
 
-        boardRestTestClient.deleteBoardIfExist(ID_BOARD);
+        boardRestTestClient.deleteBoardIfExist(idCard);
 
         String boardMessage = boardRestTestClient
-                .getBoardId(ID_BOARD)
+                .getBoardId(idCard)
                 .body()
                 .asString();
 

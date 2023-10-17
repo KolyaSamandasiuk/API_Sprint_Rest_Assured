@@ -52,6 +52,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(BoardDataResponse.class);
     }
 
+    @Step("Get boardId with parameter: String boardId")
     public Response getBoardId(String boardId) {
         return given()
                 .spec(requestSpec)

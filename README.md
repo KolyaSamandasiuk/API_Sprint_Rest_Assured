@@ -15,3 +15,8 @@ All Samandasiuk tests:
 ```bash
 mvn -DsuiteXmlFile=samandasiukSuite.xml test
 ```
+
+All Shevchuk tests:
+```bash
+mvn -DsuiteXmlFile=shevchukSuite.xml test
+```
