@@ -2,6 +2,7 @@ package api.clients;
 
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -18,6 +19,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a new list")
     public CreateListResponse createList(Map<String, String> listKeyValue, String boardId) {
         return createList(listKeyValue, boardId, HTTP_OK)
                 .as(CreateListResponse.class);

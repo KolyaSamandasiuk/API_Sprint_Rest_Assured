@@ -3,6 +3,8 @@ package api.dto;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
 
+import java.util.List;
+
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class CardDataResponse {
@@ -26,4 +28,5 @@ public class CardDataResponse {
     private String shortUrl;
     private Boolean subscribed;
     private String url;
+    private List<String> idChecklists;
 }
