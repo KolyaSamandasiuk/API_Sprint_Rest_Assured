@@ -12,7 +12,6 @@ import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
 public class MoveListTest extends BaseTest {
-
     private String firstBoardID;
     private String secondBoardId;
     private String idList;
