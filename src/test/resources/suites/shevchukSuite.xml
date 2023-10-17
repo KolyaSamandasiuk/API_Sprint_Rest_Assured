@@ -5,6 +5,7 @@
             <class name="api.post.CreateANewBoard" />
             <class name="api.put.MoveListTest" />
             <class name="api.delete.DeleteABoardTest" />
+            <class name="api.get.GetChecklistTest" />
         </classes>
     </test>
 </suite>
