@@ -1,8 +1,10 @@
 package api.clients;
 
 import api.dto.CardDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
@@ -20,6 +22,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
     private static String NAME_VALUE = "Test card";
     private static String DESC_VALUE = "Description of Test card";
 
+    @Step("Creating a new card by list id - {idList}, with parameters - {listKeyValue}")
     public CardDataResponse createCard(Map<String, String> listKeyValue, String idList) {
         return given()
                 .spec(requestSpec)
@@ -31,6 +34,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().as(CardDataResponse.class);
     }
 
+    @Step("Delete the test card by id: {0}")
     public ValidatableResponse deleteCardIfExist(String cardId) {
         return given()
                 .spec(requestSpec)
@@ -54,7 +58,11 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().as(CardDataResponse.class);
     }
 
-    public static Map<String, String> constructDefaultCardKeyValue() {
+    public static Map<String, String> constructDefaultCardKeyValueWithDesc() {
         return Map.of("name", NAME_VALUE, "desc", DESC_VALUE);
+    }
+
+    public static Map<String, String> constructDefaultCardKeyValue() {
+        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(2));
     }
 }

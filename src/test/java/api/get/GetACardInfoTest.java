@@ -2,6 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.CardDataResponse;
+import io.qameta.allure.Step;
 import jdk.jfr.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -9,7 +10,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
-import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
+import static api.clients.CardTestRestClient.constructDefaultCardKeyValueWithDesc;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
 public class GetACardInfoTest extends BaseTest {
@@ -20,14 +21,15 @@ public class GetACardInfoTest extends BaseTest {
     private String idCard;
 
     @BeforeMethod
+    @Step("Fulfillment of the prerequisites for the test")
     public void createCardOfListOnABoard() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
-        idCard = cardTestRestClient.createCard(constructDefaultCardKeyValue(), idList).getId();
+        idCard = cardTestRestClient.createCard(constructDefaultCardKeyValueWithDesc(), idList).getId();
     }
 
-    @Test
-    @Description("Getting information about the card by id")
+    @Test(description = "AS2-18")
+    @Description("Positive:Getting information about the card by id")
     public void getACardById() {
 
         CardDataResponse response = cardTestRestClient.getCardById(idCard);
@@ -37,6 +39,7 @@ public class GetACardInfoTest extends BaseTest {
     }
 
     @AfterMethod
+    @Step("Delete the test board")
     public void deleteBoard() {
         cardTestRestClient.deleteCardIfExist(idCard);
     }

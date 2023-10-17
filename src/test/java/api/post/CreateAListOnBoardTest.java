@@ -3,6 +3,7 @@ package api.post;
 import api.BaseTest;
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterClass;
@@ -24,7 +25,8 @@ public class CreateAListOnBoardTest extends BaseTest {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
     }
 
-    @Test
+    @Test(description = "AS2-21")
+    @Description("Create a List on a Board")
     public void createListOnBoard(){
         CreateListResponse createListResponse = listTestRestClient.createList(constructDefaultListKeyValue("List name"), boardId);
         List<ListsDataResponse> listsDataResponse = listTestRestClient.getLists(boardId);

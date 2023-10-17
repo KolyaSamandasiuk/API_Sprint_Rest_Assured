@@ -2,6 +2,7 @@ package api.clients;
 
 import api.dto.BoardDataResponse;
 import api.dto.CreateBoardResponse;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -20,6 +21,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a test board with parameters: {createBoardKeyValue}")
     public CreateBoardResponse createNewBoard(Map<String, String> createBoardKeyValue) {
         return given()
                 .spec(requestSpec)
@@ -31,6 +33,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateBoardResponse.class);
     }
 
+    @Step("Delete the test board by id: {0}")
     public ValidatableResponse deleteBoardIfExist(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -40,6 +43,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
+    @Step("Extracting information from the board by id: {boardId}")
     public BoardDataResponse getBoardById(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -54,6 +58,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .get("/1/boards/{id}", boardId);
     }
 
+    @Step("New parameters are assigned: id - {0}, parameters - {1}")
     public BoardDataResponse putBoardInfo(String boardId, Map<String, String> infoToBoard) {
         return given()
                 .spec(requestSpec)

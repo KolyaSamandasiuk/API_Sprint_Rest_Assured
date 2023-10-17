@@ -2,7 +2,7 @@ package api.put;
 
 import api.BaseTest;
 import api.dto.BoardDataResponse;
-import jdk.jfr.Description;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
@@ -26,8 +26,8 @@ public class UpdateABoard extends BaseTest {
         ID_BOARD = boardRestTestClient.createNewBoard(Map.of("name", NAME_VALUE, "desc", DESC_VALUE)).getId();
     }
 
-    @Test
-    @Description("Update a Board by id")
+    @Test(description = "AS2-6")
+    @Description("Positive: Update a Board by id")
     public void getABoardById() {
 
         boardParams.put("name", CHANGED_NAME_VALUE);

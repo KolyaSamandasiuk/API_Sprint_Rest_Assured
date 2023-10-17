@@ -2,6 +2,7 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
+import io.qameta.allure.Description;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
@@ -12,7 +13,8 @@ import java.util.Map;
 public class CreateANewBoard extends BaseTest {
     private String ID_BOARD;
 
-    @Test
+    @Test(description = "AS2-4")
+    @Description("Create a board")
     public void createBoardTest() {
 
         Map<String, String> boardParams = new HashMap<>();
