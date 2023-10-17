@@ -1,7 +1,9 @@
 package api.clients;
 
+import api.dto.BoardDataResponse;
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import org.apache.commons.lang3.RandomStringUtils;
@@ -18,6 +20,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Create list on Board , with parameters: Map<String, String> listKeyValue, String boardId ")
     public CreateListResponse createList(Map<String, String> listKeyValue, String boardId) {
         return createList(listKeyValue, boardId, HTTP_OK)
                 .as(CreateListResponse.class);
@@ -44,6 +47,18 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .extract()
                 .as(new TypeRef<List<ListsDataResponse>>() {
                 });
+    }
+
+    @Step("Move list with id: {listId} to board with id: {boardId}")
+    public ListsDataResponse moveList(String listId, String boardId) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .put("/1/lists/{listId}/idBoard?value={boardId}", listId, boardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(ListsDataResponse.class);
     }
 
     public static Map<String, String> constructDefaultListKeyValue() {
