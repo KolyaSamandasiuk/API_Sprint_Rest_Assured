@@ -24,7 +24,7 @@ public class CreateAChecklist extends BaseTest {
     private String cardId;
 
     @BeforeMethod
-    @Step("Fulfillment of the prerequisites for the test")
+    @Step("Preparing for the test")
     public void preconditions() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         listId = listTestRestClient.createList(constructDefaultListKeyValue(), boardId).getId();
