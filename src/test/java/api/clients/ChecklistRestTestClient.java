@@ -1,5 +1,6 @@
 package api.clients;
 
+import api.dto.BoardDataResponse;
 import api.dto.CardDataResponse;
 import api.dto.ChecklistDataResponse;
 import api.dto.CreateBoardResponse;
@@ -28,6 +29,15 @@ public class ChecklistRestTestClient extends AbstractBaseRestClient{
                 .post("/1/checklists?idCard={cardId}",cardId)
                 .then()
                 .statusCode(HTTP_OK)
+                .extract().as(ChecklistDataResponse.class);
+    }
+
+
+    public ChecklistDataResponse getChecklistById(String checklistId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/checklists/{id}", checklistId)
+                .then()
                 .extract().as(ChecklistDataResponse.class);
     }
 
