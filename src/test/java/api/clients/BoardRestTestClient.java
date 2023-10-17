@@ -21,7 +21,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    @Step("Creating a test board")
+    @Step("Creating a test board with parameters: {createBoardKeyValue}")
     public CreateBoardResponse createNewBoard(Map<String, String> createBoardKeyValue) {
         return given()
                 .spec(requestSpec)
@@ -33,7 +33,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateBoardResponse.class);
     }
 
-    @Step("Delete the test board")
+    @Step("Delete the test board by id: {0}")
     public ValidatableResponse deleteBoardIfExist(String boardId) {
         return given()
                 .spec(requestSpec)

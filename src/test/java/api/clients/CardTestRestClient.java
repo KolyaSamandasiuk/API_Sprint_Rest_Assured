@@ -19,7 +19,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
-    @Step("Creating a new card")
+    @Step("Creating a new card by list id - {idList}, with parameters - {listKeyValue}")
     public CardDataResponse createCard(Map<String, String> listKeyValue, String idList) {
         return given()
                 .spec(requestSpec)

@@ -19,7 +19,7 @@ public class ChecklistRestTestClient extends AbstractBaseRestClient{
         super(url);
     }
 
-    @Step("Creating a new checklist")
+    @Step("Creating a new checklist by card id: {cardId} with parameters: {checklistKeyValue}")
     public ChecklistDataResponse createChecklist(Map<String, String> checklistKeyValue, String cardId) {
         return given()
                 .spec(requestSpec)

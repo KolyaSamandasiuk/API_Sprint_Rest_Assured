@@ -37,7 +37,7 @@ public class CreateAChecklist extends BaseTest {
     }
 
     @Test(description = "AS2-24")
-    @Description("Create a checklist")
+    @Description("Positive: Create a checklist")
     public void createChecklist() {
         Map<String, String> checklistParams = new HashMap<>();
         checklistParams.put("name", CARD_NAME);

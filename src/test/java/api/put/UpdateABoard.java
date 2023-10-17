@@ -27,7 +27,7 @@ public class UpdateABoard extends BaseTest {
     }
 
     @Test(description = "AS2-6")
-    @Description("Update a Board by id")
+    @Description("Positive: Update a Board by id")
     public void getABoardById() {
 
         boardParams.put("name", CHANGED_NAME_VALUE);

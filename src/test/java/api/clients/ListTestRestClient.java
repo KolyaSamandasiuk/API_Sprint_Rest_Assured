@@ -25,6 +25,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .as(CreateListResponse.class);
     }
 
+    @Step("Creating new list by board id - {boardId}, with parameters - {listKeyValue}")
     public Response createList(Map<String, String> listKeyValue, String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
