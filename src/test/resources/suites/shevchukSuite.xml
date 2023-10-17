@@ -1,0 +1,11 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AllTestSuite">
+    <test name="Shevchuk Tests">
+        <classes>
+            <class name="api.post.CreateANewBoard" />
+            <class name="api.put.MoveListTest" />
+            <class name="api.delete.DeleteABoardTest" />
+        </classes>
+    </test>
+</suite>
+
