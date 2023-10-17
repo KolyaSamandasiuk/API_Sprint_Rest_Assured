@@ -18,9 +18,7 @@ import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
 
 public class CreateAChecklist extends BaseTest {
-
     private final String CARD_NAME = "New Test Checklist";
-
     private String boardId;
     private String listId;
     private String cardId;
