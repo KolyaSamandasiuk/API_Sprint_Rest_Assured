@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="AllTestSuite">
-    <test name="Tests">
+    <test name="Khraschuk tests">
         <classes>
             <class name="api.get.GetALabelsOnBoardTest" />
             <class name="api.post.CreateALabelOnBoardTest" />

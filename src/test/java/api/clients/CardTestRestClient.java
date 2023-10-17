@@ -1,8 +1,10 @@
 package api.clients;
 
 import api.dto.CardDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.Map;
 
@@ -17,6 +19,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a new card by list id - {idList}, with parameters - {listKeyValue}")
     public CardDataResponse createCard(Map<String, String> listKeyValue, String idList) {
         return given()
                 .spec(requestSpec)
@@ -41,5 +44,9 @@ public class CardTestRestClient extends AbstractBaseRestClient {
         return given()
                 .spec(requestSpec)
                 .get("/1/cards/{id}", cardId);
+    }
+
+    public static Map<String, String> constructDefaultCardKeyValue() {
+        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(2));
     }
 }
