@@ -2,8 +2,10 @@ package api.clients;
 
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
+import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
+import org.apache.commons.lang3.RandomStringUtils;
 
 import java.util.List;
 import java.util.Map;
@@ -17,11 +19,13 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         super(url);
     }
 
+    @Step("Creating a new list")
     public CreateListResponse createList(Map<String, String> listKeyValue, String boardId) {
         return createList(listKeyValue, boardId, HTTP_OK)
                 .as(CreateListResponse.class);
     }
 
+    @Step("Creating new list by board id - {boardId}, with parameters - {listKeyValue}")
     public Response createList(Map<String, String> listKeyValue, String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
@@ -34,6 +38,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .response();
     }
 
+    @Step("Get lists by board id: {boardId}")
     public List<ListsDataResponse> getLists(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -43,5 +48,9 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .extract()
                 .as(new TypeRef<List<ListsDataResponse>>() {
                 });
+    }
+
+    public static Map<String, String> constructDefaultListKeyValue() {
+        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(3));
     }
 }

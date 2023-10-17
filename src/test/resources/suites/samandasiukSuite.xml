@@ -1,0 +1,10 @@
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
+<suite name="AllTestSuite">
+    <test name="Samandasiuk tests">
+        <classes>
+            <class name="api.get.GetListsOnBoardTest" />
+            <class name="api.post.AddNewCommentToCardTest" />
+            <class name="api.post.CreateAListOnBoardTest" />
+        </classes>
+    </test>
+</suite>
