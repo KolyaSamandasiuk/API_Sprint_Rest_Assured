@@ -14,7 +14,6 @@ import java.util.Map;
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
-import static api.clients.ChecklistRestTestClient.constructDefaultChecklistKeyValue;
 
 
 public class GetChecklistTest extends BaseTest {
@@ -31,12 +30,12 @@ public class GetChecklistTest extends BaseTest {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         listId = listTestRestClient.createList(constructDefaultListKeyValue(), boardId).getId();
         cardId = cardTestRestClient.createCard(constructDefaultCardKeyValue(), listId).getId();
-        checklistId = checklistRestTestClient.createChecklist(Map.of("name",  CHECKLIST_NAME),cardId).getId();
+        checklistId = checklistRestTestClient.createChecklist(Map.of("name", CHECKLIST_NAME), cardId).getId();
     }
 
     @Test(description = "AS2-26")
     @Description("Get Checklist on a Board")
-    public void getChecklist(){
+    public void getChecklist() {
         ChecklistDataResponse response = checklistRestTestClient.getChecklistById(checklistId);
 
         Assert.assertEquals(CHECKLIST_NAME, response.getName());
