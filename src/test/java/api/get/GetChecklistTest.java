@@ -35,7 +35,7 @@ public class GetChecklistTest extends BaseTest {
     @Test(description = "AS2-26")
     @Description("Get Checklist on a Board")
     public void getChecklist() {
-        ChecklistDataResponse response = checklistRestTestClient.getChecklistById(checklistId);
+        ChecklistDataResponse response = checklistRestTestClient.tryGetChecklistById(checklistId);
 
         Assert.assertEquals(CHECKLIST_NAME, response.getName());
     }
