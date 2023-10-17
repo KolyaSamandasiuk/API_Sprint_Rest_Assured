@@ -2,9 +2,8 @@
 <suite name="AllTestSuite">
     <test name="Tests">
         <classes>
-            <class name="api.get.GetABoardInfo" />
-            <class name="api.put.UpdateABoard" />
+            <class name="api.get.GetALabelsOnBoardTest" />
+            <class name="api.post.CreateALabelOnBoardTest" />
         </classes>
     </test>
 </suite>
-
