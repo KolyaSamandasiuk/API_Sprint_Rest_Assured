@@ -21,7 +21,8 @@ public class AddNewCommentToCardTest extends BaseTest {
     private String idList;
 
     @BeforeTest
-    public void createNewBoard(){
+    @Description("Created new board and one list, in the list create card")
+    public void createBoardWithListAndCard(){
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
         idCard = cardTestRestClient.createCard(constructDefaultCardKeyValue(), idList).getId();
