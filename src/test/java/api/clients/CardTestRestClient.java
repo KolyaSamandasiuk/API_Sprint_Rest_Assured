@@ -35,7 +35,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().as(CardDataResponse.class);
     }
 
-    @Step("Creating a new card by list id - {idList}, with parameters - {listKeyValue}")
+    @Step("Creating a new attachment by card id - {idCard}, with parameters - {attachmentKeyValue}")
     public AttachmentDataResponse createAttachmentOnCard(Map<String, String> attachmentKeyValue, String idCard) {
         return given()
                 .spec(requestSpec)

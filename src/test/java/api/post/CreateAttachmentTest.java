@@ -6,6 +6,7 @@ import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.Assert;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
@@ -44,6 +45,10 @@ public class CreateAttachmentTest extends BaseTest {
         Assert.assertEquals(response.getName(), NAME);
         Assert.assertEquals(response.getMimeType(), MIME_TYPE);
         Assert.assertEquals(response.getUrl(), URL);
-        Allure.addAttachment("API Log", "This is API logs");
+    }
+
+    @AfterMethod
+    public void deleteBoard() {
+        boardRestTestClient.deleteBoardIfExist(boardId);
     }
 }
