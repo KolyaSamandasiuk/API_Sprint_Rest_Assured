@@ -16,4 +16,5 @@ public class CreateBoardResponse {
     private Boolean pinned;
     private String url;
     private String shortUrl;
+    private String massage;
 }

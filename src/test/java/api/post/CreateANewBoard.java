@@ -3,12 +3,15 @@ package api.post;
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
+import io.restassured.path.json.JsonPath;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateANewBoard extends BaseTest {
     private String ID_BOARD;
@@ -26,10 +29,28 @@ public class CreateANewBoard extends BaseTest {
         Assert.assertNotNull(response, "Board creation failed");
         Assert.assertNotNull(response.getId(), "Board ID is null");
         Assert.assertEquals(response.getName(), "Test board", "Board name doesn't match");
+
+        deleteBoard();
     }
 
-    @AfterMethod
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(ID_BOARD);
+    }
+
+    @Test(description = "AS2-36")
+    @Description(" Negative: Create a Board with invalid name ")
+    public void createBoardWithEmptyNameTest() {
+
+        boardRestTestClient.tryToCreateABoard(constructDefaultNoNameBoardKeyValue(" "), HTTP_BAD_REQUEST);
+
+        String jsonResponse = "{ \"message\": \"invalid value for name\", \"error\": \"ERROR\" }";
+        JsonPath jp = new JsonPath(jsonResponse);
+        String message = jp.getString("message");
+
+        assertThat(message).isEqualTo("invalid value for name");
+    }
+
+    private Map<String, String> constructDefaultNoNameBoardKeyValue(String boardName) {
+        return Map.of("name", boardName);
     }
 }
