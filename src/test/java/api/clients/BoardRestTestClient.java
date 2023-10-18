@@ -33,6 +33,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateBoardResponse.class);
     }
 
+    @Step("Trying to create a board with parameters {createBoardKeyValue} and {statusCode}")
     public Response tryToCreateABoard(Map<String, String> createBoardKeyValue, int statusCode) {
         return given()
                 .spec(requestSpec)
