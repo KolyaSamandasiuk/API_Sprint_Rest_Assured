@@ -82,7 +82,7 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .get("/1/labels/{id}", checklabelId);
     }
 
-    @Step("New parameters are assigned: id - {0}, parameters - {1}")
+    @Step("Assigning parameters {1} to a label with an id: {0}")
     public CreateLabelResponse putLabelInfo(String labelId, Map<String, String> infoToLabel) {
         return given()
                 .spec(requestSpec)
