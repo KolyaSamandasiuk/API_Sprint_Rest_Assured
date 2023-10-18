@@ -1,5 +1,6 @@
 package api.clients;
 
+import api.dto.BoardDataResponse;
 import api.dto.CreateLabelResponse;
 import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
@@ -79,6 +80,18 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
         return given()
                 .spec(requestSpec)
                 .get("/1/labels/{id}", checklabelId);
+    }
+
+    @Step("New parameters are assigned: id - {0}, parameters - {1}")
+    public CreateLabelResponse putLabelInfo(String labelId, Map<String, String> infoToLabel) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToLabel)
+                .when()
+                .put("/1/labels/{id}", labelId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(CreateLabelResponse.class);
     }
 
     public static Map<String, String> constructDefaultLabelKeyValue(String labelName, String labelColor, String idBoard) {
