@@ -4,13 +4,16 @@ import api.dto.CreateLabelResponse;
 import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
-import org.apache.commons.lang3.RandomStringUtils;
+import io.restassured.response.ValidatableResponse;
 
 import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
+import static java.net.HttpURLConnection.HTTP_NOT_FOUND;
 import static java.net.HttpURLConnection.HTTP_OK;
+import static org.hamcrest.CoreMatchers.anyOf;
+import static org.hamcrest.Matchers.is;
 
 public class LabelRestTestClient extends AbstractBaseRestClient {
 
@@ -59,6 +62,23 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .get("/1/labels/{id}", labelId)
                 .then()
                 .extract().as(CreateLabelResponse.class);
+    }
+
+    @Step("Delete a label by id: {labelId}")
+    public ValidatableResponse deleteLabel(String labelId) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .delete("/1/labels/{id}", labelId)
+                .then()
+                .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
+    }
+
+    @Step("Trying to find the label by id: {checklabelId}")
+    public Response tryGetLabelById(String checklabelId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/labels/{id}", checklabelId);
     }
 
     public static Map<String, String> constructDefaultLabelKeyValue(String labelName, String labelColor, String idBoard) {
