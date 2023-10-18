@@ -61,7 +61,24 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .as(ListsDataResponse.class);
     }
 
+    @Step("Update list information with id: {idList}")
+    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList){
+        return given()
+                .spec(requestSpec)
+                .queryParams(listKeyValue)
+                .when()
+                .put("/1/lists/{id}", idList)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(ListsDataResponse.class);
+    }
+
     public static Map<String, String> constructDefaultListKeyValue() {
         return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(2));
+    }
+
+    public static Map<String, String> constructPutListKeyValue(String name) {
+        return Map.of("name", name + " " + RandomStringUtils.randomAlphanumeric(3));
     }
 }
