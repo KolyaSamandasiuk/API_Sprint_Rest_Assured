@@ -50,4 +50,3 @@ public class GetListsOnBoardTest extends BaseTest {
         return Map.of("name",  listName);
     }
 }
-

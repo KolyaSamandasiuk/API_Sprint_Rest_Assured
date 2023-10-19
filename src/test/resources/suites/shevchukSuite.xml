@@ -6,6 +6,7 @@
             <class name="api.put.MoveListTest" />
             <class name="api.delete.DeleteABoardTest" />
             <class name="api.get.GetChecklistTest" />
+            <class name="api.post.MoveAllCardsInList" />
         </classes>
     </test>
     <test name="Shevchuk negative Tests">
