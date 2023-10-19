@@ -4,6 +4,7 @@ import api.BaseTest;
 import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -31,6 +32,20 @@ public class CreateANewBoard extends BaseTest {
         Assert.assertEquals(response.getName(), "Test board", "Board name doesn't match");
 
         deleteBoard();
+    }
+
+    @Test(description = "AS2-34")
+    @Description("Negative: Create a Board with invalid token")
+    public void createBoardWithNegativeToken() {
+        Map<String, String> boardParams = new HashMap<>();
+        boardParams.put("name", "Test board");
+
+        Response response = boardRestTestClient.createNewBoardWithInvalidToken(boardParams, HTTP_UNAUTHORIZED);
+
+        String message = response.asString();
+
+        assertThat(message).isEqualTo("invalid token");
+
     }
 
     public void deleteBoard() {
