@@ -1,27 +1,30 @@
 package api.post;
 
 import api.BaseTest;
-import api.dto.ChecklistDataResponse;
+import api.dto.AttachmentDataResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
+import static api.clients.CardTestRestClient.constructAttachmentKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
+public class CreateAttachmentTest extends BaseTest {
+    private final String NAME = "NewAttachment";
+    private final String MIME_TYPE = "pdf";
+    private final String URL = "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing";
+    private final String SET_COVER = "false";
 
-public class CreateAChecklist extends BaseTest {
-    private final String CARD_NAME = "New Test Checklist";
     private String boardId;
     private String listId;
     private String cardId;
+    private SoftAssertions assertions;
 
     @BeforeMethod
     @Step("Preparing for the test")
@@ -31,15 +34,16 @@ public class CreateAChecklist extends BaseTest {
         cardId = cardTestRestClient.createCard(constructDefaultCardKeyValue(), listId).getId();
     }
 
-    @Test(description = "AS2-24")
-    @Description("Positive: Create a checklist")
-    public void createChecklist() {
-        Map<String, String> checklistParams = new HashMap<>();
-        checklistParams.put("name", CARD_NAME);
+    @Test(description = "AS2-33")
+    @Description("Positive: Create Attachment On Card")
+    public void createAttechment() {
+        assertions = new SoftAssertions();
+        AttachmentDataResponse response = cardTestRestClient.createAttachmentOnCard(constructAttachmentKeyValue(NAME, MIME_TYPE, URL, SET_COVER), cardId);
 
-        ChecklistDataResponse response = checklistRestTestClient.createChecklist(checklistParams, cardId);
-
-        Assert.assertEquals(response.getName(), CARD_NAME);
+        assertions.assertThat(response.getName() == NAME);
+        assertions.assertThat(response.getMimeType() == MIME_TYPE);
+        assertions.assertThat(response.getUrl() == URL);
+        assertions.assertAll();
     }
 
     @AfterMethod

@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class DeleteABoardTest extends BaseTest {
 
-    private String ID_BOARD;
+    private String idCard;
 
     @Test(description = "AS2-10")
     @Description("Positive: Delete a Board ")
@@ -20,12 +20,12 @@ public class DeleteABoardTest extends BaseTest {
         boardParams.put("name", "Test board");
 
         CreateBoardResponse response = boardRestTestClient.createNewBoard(boardParams);
-        ID_BOARD = response.getId();
+        idCard = response.getId();
 
-        boardRestTestClient.deleteBoardIfExist(ID_BOARD);
+        boardRestTestClient.deleteBoardIfExist(idCard);
 
         String boardMessage = boardRestTestClient
-                .getBoardId(ID_BOARD)
+                .getBoardId(idCard)
                 .body()
                 .asString();
 

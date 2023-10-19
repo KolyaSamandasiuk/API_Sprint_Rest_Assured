@@ -1,7 +1,6 @@
-package api.post;
+package api.delete;
 
 import api.BaseTest;
-import api.dto.ChecklistDataResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
 import org.testng.Assert;
@@ -9,37 +8,37 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
+import static api.clients.ChecklistRestTestClient.constructDefaultChecklistKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
-
-public class CreateAChecklist extends BaseTest {
-    private final String CARD_NAME = "New Test Checklist";
+public class DeleteAChecklistTest extends BaseTest {
     private String boardId;
     private String listId;
     private String cardId;
+    private String checklistId;
 
     @BeforeMethod
-    @Step("Preparing for the test")
+    @Step("Fulfillment of the prerequisites for the test")
     public void preconditions() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         listId = listTestRestClient.createList(constructDefaultListKeyValue(), boardId).getId();
         cardId = cardTestRestClient.createCard(constructDefaultCardKeyValue(), listId).getId();
+        checklistId = checklistRestTestClient.createChecklist(constructDefaultChecklistKeyValue(),cardId).getId();
     }
 
-    @Test(description = "AS2-24")
-    @Description("Positive: Create a checklist")
-    public void createChecklist() {
-        Map<String, String> checklistParams = new HashMap<>();
-        checklistParams.put("name", CARD_NAME);
+    @Test(description = "AS2-27")
+    @Description("Positive : Delete checklist")
+    public void DeleteAChecklist() {
+        checklistRestTestClient.deleteChecklistIfExist(checklistId);
 
-        ChecklistDataResponse response = checklistRestTestClient.createChecklist(checklistParams, cardId);
+        String boardMessage = checklistRestTestClient
+                .tryGetChecklistById(checklistId)
+                .body()
+                .asString();
 
-        Assert.assertEquals(response.getName(), CARD_NAME);
+        Assert.assertEquals(boardMessage, "The requested resource was not found.");
     }
 
     @AfterMethod
