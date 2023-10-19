@@ -55,6 +55,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_BAD_REQUEST)));
     }
 
+    @Step ("Trying to delete board with invalid id")
     public Response tryToDeleteBoardWithInvalidId(String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)

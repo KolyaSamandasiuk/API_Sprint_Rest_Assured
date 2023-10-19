@@ -12,6 +12,7 @@
     <test name="Shevchuk negative Tests">
         <classes>
             <class name="api.post.CreateANewBoard" />
+            <class name="api.delete.DeleteABoardTest" />
 
         </classes>
     </test>
