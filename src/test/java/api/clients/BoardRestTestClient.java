@@ -33,6 +33,19 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .extract().as(CreateBoardResponse.class);
     }
 
+    @Step("Trying to create a board with parameters {createBoardKeyValue} and status code: {statusCode}")
+    public Response tryToCreateABoard(Map<String, String> createBoardKeyValue, int statusCode) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(createBoardKeyValue)
+                .when()
+                .post("/1/boards/")
+                .then()
+                .statusCode(statusCode)
+                .extract()
+                .response();
+    }
+
     @Step("try to create board with invalid token")
     public Response createNewBoardWithInvalidToken(Map<String, String> createBoardKeyValue, int statusCode) {
         return given()
@@ -85,6 +98,6 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
     }
 
     public static Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 }

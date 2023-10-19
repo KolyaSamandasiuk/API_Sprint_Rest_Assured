@@ -3,6 +3,7 @@ package api.post;
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -10,7 +11,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateANewBoard extends BaseTest {
@@ -49,5 +50,21 @@ public class CreateANewBoard extends BaseTest {
 
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(ID_BOARD);
+    }
+
+    @Test(description = "AS2-36")
+    @Description(" Negative: Create a Board with invalid name ")
+    public void createBoardWithEmptyNameTest() {
+
+        Map<String, String> boardParams = new HashMap<>();
+        boardParams.put("name", " ");
+
+            boardRestTestClient.tryToCreateABoard(boardParams, HTTP_BAD_REQUEST);
+
+        String jsonResponse = "{ \"message\": \"invalid value for name\", \"error\": \"ERROR\" }";
+        JsonPath jp = new JsonPath(jsonResponse);
+        String message = jp.getString("message");
+
+        assertThat(message).isEqualTo("invalid value for name");
     }
 }

@@ -1,11 +1,12 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 <suite name="AllTestSuite">
-    <test name="Royko tests">
+    <test name="Royko positive tests">
         <classes>
             <class name="api.get.GetABoardInfo" />
             <class name="api.put.UpdateABoard" />
             <class name="api.post.CreateAChecklist" />
             <class name="api.delete.DeleteAChecklistTest" />
+            <class name="api.post.CreateAttachmentTest" />
         </classes>
     </test>
 </suite>
