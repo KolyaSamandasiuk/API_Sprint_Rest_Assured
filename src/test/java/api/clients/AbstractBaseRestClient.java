@@ -1,10 +1,13 @@
 package api.clients;
 
+import io.qameta.allure.Allure;
 import io.restassured.RestAssured;
 import io.restassured.filter.log.RequestLoggingFilter;
 import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
+
+import java.util.List;
 
 import static api.clients.ConfigProvider.KEY;
 import static api.clients.ConfigProvider.TOKEN;
@@ -26,4 +29,3 @@ public abstract class AbstractBaseRestClient {
         }
     }
 }
-

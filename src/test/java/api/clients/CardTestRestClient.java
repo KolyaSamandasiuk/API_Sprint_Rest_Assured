@@ -1,11 +1,15 @@
 package api.clients;
 
+import api.dto.AttachmentDataResponse;
 import api.dto.CardDataResponse;
+import api.dto.CreateLabelResponse;
 import io.qameta.allure.Step;
+import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
+import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -31,6 +35,19 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().as(CardDataResponse.class);
     }
 
+    @Step("Creating a new attachment by card id - {idCard}, with parameters - {attachmentKeyValue}")
+    public AttachmentDataResponse createAttachmentOnCard(Map<String, String> attachmentKeyValue, String idCard) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(attachmentKeyValue)
+                .when()
+                .post("/1/cards/{id}/attachments", idCard)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(AttachmentDataResponse.class);
+    }
+
     public ValidatableResponse deleteCardIfExist(String cardId) {
         return given()
                 .spec(requestSpec)
@@ -46,7 +63,26 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .get("/1/cards/{id}", cardId);
     }
 
+    @Step ("Add new comment to card by id: {idCard} with query params: {commentKeyValue}")
+    public Response addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(commentKeyValue)
+                .post("/1/cards/{id}/actions/comments", idCard)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().response();
+    }
+
     public static Map<String, String> constructDefaultCardKeyValue() {
-        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(3));
+    }
+
+    public static Map<String, String> constructDefaultCommentKeyValue() {
+        return Map.of("text", "Test comment");
+    }
+
+    public static Map<String, String> constructAttachmentKeyValue(String name, String mimeType, String url, String setCover) {
+        return Map.of("name",name,"mimeType",mimeType,"url",url, "setCover", setCover);
     }
 }

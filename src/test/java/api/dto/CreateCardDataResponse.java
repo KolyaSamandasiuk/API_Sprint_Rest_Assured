@@ -5,10 +5,7 @@ import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class ChecklistDataResponse {
+public class CreateCardDataResponse {
     private String id;
     private String name;
-    private String idBoard;
-    private Object idCard;
-    private int pos;
 }

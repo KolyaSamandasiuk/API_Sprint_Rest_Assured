@@ -1,5 +1,6 @@
 package api.clients;
 
+import api.dto.CardDataResponse;
 import api.dto.CreateListResponse;
 import api.dto.ListsDataResponse;
 import io.qameta.allure.Step;
@@ -74,8 +75,26 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .as(ListsDataResponse.class);
     }
 
+    @Step("Moving all cards from list by id: {listId} and with parameters: {moveCardsInListKeyValue}")
+    public List<CardDataResponse> moveAllCardsInList(Map<String, String> moveCardsInListKeyValue, String listId) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(moveCardsInListKeyValue)
+                .when()
+                .post("/1/lists/{id}/moveAllCards", listId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(new TypeRef<List<CardDataResponse>>() {
+                });
+    }
+
     public static Map<String, String> constructDefaultListKeyValue() {
-        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(3));
+    }
+
+    public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId){
+        return Map.of("idBoard" , boardId , "idList" , listId );
     }
 
     public static Map<String, String> constructPutListKeyValue(String name) {
