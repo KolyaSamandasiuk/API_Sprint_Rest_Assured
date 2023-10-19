@@ -51,6 +51,6 @@ public class DeleteACardTest extends BaseTest {
     @AfterMethod
     @Step("Delete the test board")
     public void deleteBoard() {
-        cardTestRestClient.deleteCardIfExist(idCard);
+        boardRestTestClient.deleteBoardIfExist(idBoard);
     }
 }

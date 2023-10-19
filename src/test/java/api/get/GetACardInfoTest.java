@@ -25,22 +25,20 @@ public class GetACardInfoTest extends BaseTest {
     public void createCardOfListOnABoard() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
-        idCard = cardTestRestClient.createCard(constructDefaultCardKeyValueWithDesc(), idList).getId();
+        idCard = cardTestRestClient.createCard(constructDefaultCardKeyValueWithDesc(NAME_VALUE, DESC_VALUE), idList).getId();
     }
 
     @Test(description = "AS2-18")
     @Description("Positive:Getting information about the card by id")
     public void getACardById() {
-
-        CardDataResponse response = cardTestRestClient.getCardById(idCard);
+        CardDataResponse response = cardTestRestClient.getCardInfoById(idCard);
 
         Assert.assertEquals(NAME_VALUE, response.getName());
         Assert.assertEquals(DESC_VALUE, response.getDesc());
     }
 
     @AfterMethod
-    @Step("Delete the test board")
     public void deleteBoard() {
-        cardTestRestClient.deleteCardIfExist(idCard);
+        boardRestTestClient.deleteBoardIfExist(idBoard);
     }
 }
