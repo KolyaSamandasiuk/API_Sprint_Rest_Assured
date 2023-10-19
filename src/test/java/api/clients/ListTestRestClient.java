@@ -63,7 +63,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .as(ListsDataResponse.class);
     }
 
-    @Step("Update list information with id: {idList}")
+    @Step("Update list information with id: {idList}. Transfer the query parameters using listKeyValue: {listKeyValue} ")
     public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList){
         return given()
                 .spec(requestSpec)

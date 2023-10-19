@@ -3,6 +3,7 @@ package api.put;
 import api.BaseTest;
 import api.dto.ListsDataResponse;
 import io.qameta.allure.Description;
+import io.qameta.allure.Step;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -20,7 +21,7 @@ public class UpdateListTest extends BaseTest {
     private String idList;
 
     @BeforeMethod
-    @Description("Create board and list")
+    @Step("Create board and list")
     public void createBoardAndList() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
