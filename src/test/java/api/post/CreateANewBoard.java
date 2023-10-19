@@ -5,16 +5,13 @@ import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
 import io.restassured.response.Response;
 import org.testng.Assert;
-import org.testng.annotations.AfterMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.testng.AssertJUnit.assertEquals;
 
 public class CreateANewBoard extends BaseTest {
     private String ID_BOARD;
@@ -38,18 +35,17 @@ public class CreateANewBoard extends BaseTest {
 
     @Test(description = "AS2-34")
     @Description("Negative: Create a Board with invalid token")
-    public void createBoardWithNegativeToken(){
+    public void createBoardWithNegativeToken() {
         Map<String, String> boardParams = new HashMap<>();
         boardParams.put("name", "Test board");
 
-        Response response =boardRestTestClient.createNewBoardWithInvalidToken(boardParams, HTTP_UNAUTHORIZED);
+        Response response = boardRestTestClient.createNewBoardWithInvalidToken(boardParams, HTTP_UNAUTHORIZED);
 
         String message = response.asString();
 
         assertThat(message).isEqualTo("invalid token");
 
     }
-
 
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(ID_BOARD);
