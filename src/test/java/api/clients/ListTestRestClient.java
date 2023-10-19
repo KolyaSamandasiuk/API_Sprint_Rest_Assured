@@ -39,6 +39,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .response();
     }
 
+    @Step("Get board lists by id: {boardId}")
     public List<ListsDataResponse> getLists(String boardId) {
         return given()
                 .spec(requestSpec)
