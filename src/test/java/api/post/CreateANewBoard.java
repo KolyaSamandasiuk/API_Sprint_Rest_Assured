@@ -41,16 +41,15 @@ public class CreateANewBoard extends BaseTest {
     @Description(" Negative: Create a Board with invalid name ")
     public void createBoardWithEmptyNameTest() {
 
-        boardRestTestClient.tryToCreateABoard(constructDefaultNoNameBoardKeyValue(" "), HTTP_BAD_REQUEST);
+        Map<String, String> boardParams = new HashMap<>();
+        boardParams.put("name", " ");
+
+            boardRestTestClient.tryToCreateABoard(boardParams, HTTP_BAD_REQUEST);
 
         String jsonResponse = "{ \"message\": \"invalid value for name\", \"error\": \"ERROR\" }";
         JsonPath jp = new JsonPath(jsonResponse);
         String message = jp.getString("message");
 
         assertThat(message).isEqualTo("invalid value for name");
-    }
-
-    private Map<String, String> constructDefaultNoNameBoardKeyValue(String boardName) {
-        return Map.of("name", boardName);
     }
 }
