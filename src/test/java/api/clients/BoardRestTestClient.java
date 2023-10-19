@@ -45,6 +45,19 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .response();
     }
 
+    @Step("try to create board with invalid token")
+    public Response createNewBoardWithInvalidToken(Map<String, String> createBoardKeyValue, int statusCode) {
+        return given()
+                .spec(invalidRequestSpec)
+                .queryParams(createBoardKeyValue)
+                .when()
+                .post("/1/boards/")
+                .then()
+                .statusCode(statusCode)
+                .extract()
+                .response();
+    }
+
     @Step("Delete the test board by id: {0}")
     public ValidatableResponse deleteBoardIfExist(String boardId) {
         return given()
