@@ -1,6 +1,5 @@
 package api.clients;
 
-import api.dto.BoardDataResponse;
 import api.dto.CreateLabelResponse;
 import io.qameta.allure.Step;
 import io.restassured.common.mapper.TypeRef;

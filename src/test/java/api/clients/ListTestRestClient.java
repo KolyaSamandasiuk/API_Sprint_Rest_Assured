@@ -64,7 +64,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
     }
 
     @Step("Update list information with id: {idList}. Transfer the query parameters using listKeyValue: {listKeyValue} ")
-    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList){
+    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList) {
         return given()
                 .spec(requestSpec)
                 .queryParams(listKeyValue)
@@ -94,8 +94,8 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(3));
     }
 
-    public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId){
-        return Map.of("idBoard" , boardId , "idList" , listId );
+    public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId) {
+        return Map.of("idBoard", boardId, "idList", listId);
     }
 
     public static Map<String, String> constructPutListKeyValue(String name) {
