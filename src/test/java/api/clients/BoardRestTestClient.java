@@ -72,6 +72,6 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
     }
 
     public static Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 }

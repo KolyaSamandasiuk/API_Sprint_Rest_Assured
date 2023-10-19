@@ -63,8 +63,23 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .get("/1/cards/{id}", cardId);
     }
 
+    @Step ("Add new comment to card by id: {idCard} with query params: {commentKeyValue}")
+    public Response addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(commentKeyValue)
+                .post("/1/cards/{id}/actions/comments", idCard)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().response();
+    }
+
     public static Map<String, String> constructDefaultCardKeyValue() {
-        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(3));
+    }
+
+    public static Map<String, String> constructDefaultCommentKeyValue() {
+        return Map.of("text", "Test comment");
     }
 
     public static Map<String, String> constructAttachmentKeyValue(String name, String mimeType, String url, String setCover) {
