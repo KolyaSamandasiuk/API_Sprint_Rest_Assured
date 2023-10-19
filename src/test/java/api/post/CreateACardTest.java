@@ -2,10 +2,11 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.CardDataResponse;
+import io.qameta.allure.Step;
 import jdk.jfr.Description;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
@@ -21,14 +22,15 @@ public class CreateACardTest extends BaseTest {
     private static String CARD_NAME = "New Test Card";
     private static String DESCRIPTION_OF_CARD = "The description for the Test Card";
 
-    @BeforeClass
+    @BeforeMethod
+    @Step("Fulfillment of the prerequisites for the test")
     public void createListOnABoard() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
     }
 
     @Test(description = "AS2-12")
-    @Description("Create a Card")
+    @Description("Positive: Create a Card")
     public void createСard() {
         Map<String, String> cardParams = new HashMap<>();
         cardParams.put("name", CARD_NAME);
@@ -41,8 +43,8 @@ public class CreateACardTest extends BaseTest {
         Assert.assertEquals(response.getDesc(), DESCRIPTION_OF_CARD, "Card description is empty");
     }
 
-    @AfterClass
+    @AfterMethod
     public void deleteBoard() {
-        cardTestRestClient.deleteCardIfExist(idCard);
+        boardRestTestClient.deleteBoardIfExist(idBoard);
     }
 }

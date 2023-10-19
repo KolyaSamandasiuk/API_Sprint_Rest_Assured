@@ -15,7 +15,6 @@ public class GetABoardInfo extends BaseTest {
 
     private final String NAME_VALUE = "Test board";
     private final String DESC_VALUE = "Decription is empty";
-
     public String ID_BOARD;
 
     @BeforeMethod
