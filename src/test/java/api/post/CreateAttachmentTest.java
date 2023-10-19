@@ -2,20 +2,18 @@ package api.post;
 
 import api.BaseTest;
 import api.dto.AttachmentDataResponse;
-import io.qameta.allure.Allure;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import java.util.List;
-
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
-import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
-import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
 import static api.clients.CardTestRestClient.constructAttachmentKeyValue;
+import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
+import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
 public class CreateAttachmentTest extends BaseTest {
     private final String NAME = "NewAttachment";
@@ -23,11 +21,10 @@ public class CreateAttachmentTest extends BaseTest {
     private final String URL = "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing";
     private final String SET_COVER = "false";
 
-
-
     private String boardId;
     private String listId;
     private String cardId;
+    private SoftAssertions assertions;
 
     @BeforeMethod
     @Step("Preparing for the test")
@@ -39,12 +36,14 @@ public class CreateAttachmentTest extends BaseTest {
 
     @Test(description = "AS2-33")
     @Description("Positive: Create Attachment On Card")
-    public void createAttecnmet() {
-        AttachmentDataResponse response = cardTestRestClient.createAttachmentOnCard(constructAttachmentKeyValue(NAME,MIME_TYPE,URL,SET_COVER),cardId);
+    public void createAttechment() {
+        assertions = new SoftAssertions();
+        AttachmentDataResponse response = cardTestRestClient.createAttachmentOnCard(constructAttachmentKeyValue(NAME, MIME_TYPE, URL, SET_COVER), cardId);
 
-        Assert.assertEquals(response.getName(), NAME);
-        Assert.assertEquals(response.getMimeType(), MIME_TYPE);
-        Assert.assertEquals(response.getUrl(), URL);
+        assertions.assertThat(response.getName() == NAME);
+        assertions.assertThat(response.getMimeType() == MIME_TYPE);
+        assertions.assertThat(response.getUrl() == URL);
+        assertions.assertAll();
     }
 
     @AfterMethod
