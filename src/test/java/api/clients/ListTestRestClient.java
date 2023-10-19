@@ -80,7 +80,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
         return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(2));
     }
 
-    public static Map<String, String> moveAllCardsToListKeyValue(String boardId, String listId){
+    public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId){
         return Map.of("idBoard" , boardId , "idList" , listId );
     }
 }

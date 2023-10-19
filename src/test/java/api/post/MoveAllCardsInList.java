@@ -14,10 +14,10 @@ import java.util.List;
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
-import static api.clients.ListTestRestClient.moveAllCardsToListKeyValue;
+import static api.clients.ListTestRestClient.constructMoveAllCardsToListKeyValue;
+import static javax.swing.UIManager.get;
 
 public class MoveAllCardsInList extends BaseTest {
-
     private String boardId;
     private String listId;
     private String cardId;
@@ -26,7 +26,7 @@ public class MoveAllCardsInList extends BaseTest {
     private String secondListId;
 
     @BeforeMethod
-    @Step("Fulfillment of the prerequisites for the test")
+    @Step("\"Preparing to the test")
     public void preconditions() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         listId = listTestRestClient.createList(constructDefaultListKeyValue(), boardId).getId();
@@ -34,17 +34,14 @@ public class MoveAllCardsInList extends BaseTest {
         secondCardId = cardTestRestClient.createCard(constructDefaultCardKeyValue(), listId).getId();
         secondBoardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         secondListId = listTestRestClient.createList(constructDefaultListKeyValue(), secondBoardId).getId();
-
     }
 
     @Test(description = "AS2-32")
     @Description("Positive: Move all Cards in List")
     public void moveCardsInList() {
-        List<CardDataResponse> response = listTestRestClient.moveAllCardsInList(moveAllCardsToListKeyValue(secondBoardId, secondListId), listId);
+        List<CardDataResponse> response = listTestRestClient.moveAllCardsInList(constructMoveAllCardsToListKeyValue(secondBoardId, secondListId), listId);
 
-        for (CardDataResponse card : response) {
-            Assert.assertEquals(card.getIdList(), secondListId, "Card was not moved to the target list");
-        }
+        Assert.assertEquals(response.get(0).getIdList(), secondListId, "Card was not moved to the target list");
     }
 
     @AfterMethod
