@@ -13,6 +13,7 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.Map;
 
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -25,8 +26,8 @@ public class CreateAListOnBoardTest extends BaseTest {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
     }
 
-    @Test(description = "AS2-21")
-    @Description("Create a List on a Board")
+    @Test(description = "Create new list on a Board")
+    @Description("Positive: Create a list on the board")
     public void createListOnBoard(){
         CreateListResponse createListResponse = listTestRestClient.createList(constructDefaultListKeyValue("List name"), boardId);
         List<ListsDataResponse> listsDataResponse = listTestRestClient.getLists(boardId);
@@ -38,7 +39,8 @@ public class CreateAListOnBoardTest extends BaseTest {
         assertThat(listsDataResponse.get(3).getName()).isEqualTo("Done");
     }
 
-    @Test
+    @Test(description = "AS2-21")
+    @Description("Negative: Create a list on the board")
     public void shouldNotCreateWithoutName(){
         Response response = listTestRestClient.createList(constructDefaultListKeyValue(""), boardId, HTTP_BAD_REQUEST);
         String message = response.asString();
@@ -49,10 +51,6 @@ public class CreateAListOnBoardTest extends BaseTest {
     @AfterClass
     public void deleteBoard(){
         boardRestTestClient.deleteBoardIfExist(boardId);
-    }
-
-    private Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
     }
 
     private Map<String, String> constructDefaultListKeyValue(String listName) {

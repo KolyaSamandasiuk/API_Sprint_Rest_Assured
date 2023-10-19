@@ -2,9 +2,7 @@ package api.get;
 
 import api.BaseTest;
 import api.dto.ListsDataResponse;
-import io.qameta.allure.Step;
 import jdk.jfr.Description;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
@@ -13,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
@@ -25,7 +24,7 @@ public class GetListsOnBoardTest extends BaseTest {
     @BeforeMethod
     public void createBoard() {
         boardId = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
-        listNamesForCreate.forEach(name -> listTestRestClient.createList(constructDefaultListKeyValue(name), boardId));
+        listNamesForCreate.forEach(name -> listTestRestClient.createList(constructListKeyValueName(name), boardId));
     }
 
     @Test(description = "AS2-20")
@@ -42,11 +41,7 @@ public class GetListsOnBoardTest extends BaseTest {
         boardRestTestClient.deleteBoardIfExist(boardId);
     }
 
-    private Map<String, String> constructDefaultBoardKeyValue() {
-        return Map.of("name", "Test board " + RandomStringUtils.randomAlphanumeric(3));
-    }
-
-    private Map<String, String> constructDefaultListKeyValue(String listName) {
+    private Map<String, String> constructListKeyValueName(String listName) {
         return Map.of("name",  listName);
     }
 }

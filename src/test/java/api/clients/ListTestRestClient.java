@@ -39,6 +39,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .response();
     }
 
+    @Step("Get lists by board id: {boardId}")
     public List<ListsDataResponse> getLists(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -77,7 +78,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
     }
 
     public static Map<String, String> constructDefaultListKeyValue() {
-        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(2));
+        return Map.of("name", "Test list " + RandomStringUtils.randomAlphanumeric(3));
     }
 
     public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId){
