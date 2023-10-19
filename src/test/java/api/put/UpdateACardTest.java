@@ -16,7 +16,7 @@ import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValueWithDesc;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 
-public class UpdateACard extends BaseTest {
+public class UpdateACardTest extends BaseTest {
     private final String NAME_VALUE = "Test Card";
     private final String DESC_VALUE = "The description for the Test Card";
     private final String CHANGED_NAME_VALUE = "New Test Card";
