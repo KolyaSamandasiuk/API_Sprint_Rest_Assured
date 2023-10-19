@@ -20,6 +20,7 @@ public class UpdateListTest extends BaseTest {
     private String idList;
 
     @BeforeMethod
+    @Description("Create board and list")
     public void createBoardAndList() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
