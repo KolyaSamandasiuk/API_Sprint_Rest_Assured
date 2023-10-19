@@ -48,6 +48,19 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .as(AttachmentDataResponse.class);
     }
 
+    @Step("Try create attachment by card id({idCard}). Expected status code: {statusCode}. Parameters - {attachmentKeyValue}")
+    public Response tryCreateAttachmentOnCard(Map<String, String> attachmentKeyValue, String idCard, int statusCode) {
+        return given()
+                .spec(requestSpec)
+                .queryParams(attachmentKeyValue)
+                .when()
+                .post("/1/cards/{id}/attachments", idCard)
+                .then()
+                .statusCode(statusCode)
+                .extract()
+                .response();
+    }
+
     public ValidatableResponse deleteCardIfExist(String cardId) {
         return given()
                 .spec(requestSpec)

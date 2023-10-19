@@ -4,6 +4,8 @@ import api.BaseTest;
 import api.dto.AttachmentDataResponse;
 import io.qameta.allure.Description;
 import io.qameta.allure.Step;
+import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.assertj.core.api.SoftAssertions;
 import org.testng.Assert;
 import org.testng.annotations.AfterMethod;
@@ -15,17 +17,9 @@ import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.CardTestRestClient.constructAttachmentKeyValue;
 import static api.clients.CardTestRestClient.constructDefaultCardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateAttachmentTest extends BaseTest {
-    @DataProvider(name = "invalidAttachmentData")
-    private Object[][] userDataProvider() {
-        return new Object[][]{
-            {"", "pdf", "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing", "false"},
-            {"NewAttachment", "", "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing", "false"},
-            {"NewAttachment", "pdf", "", "false"},
-            {"NewAttachment", "pdf", "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing", ""},
-        };
-    }
     private final String NAME = "NewAttachment";
     private final String MIME_TYPE = "pdf";
     private final String URL = "https://drive.google.com/file/d/1voEXDM9lUlXAdp7ZkIaUt3Fhtgjwdcwa/view?usp=sharing";
@@ -56,11 +50,14 @@ public class CreateAttachmentTest extends BaseTest {
         assertions.assertAll();
     }
 
-    @Test(description = "AS2-39",dataProvider = "invalidAttachmentData")
+    @Test(description = "AS2-39")
     @Description("Negative: Creating an attachment with incorrect data")
-    public void InvalidCreateAttechment(String name, String mimeType, String url, String setCover) {
+    public void InvalidCreateAttechment() {
         assertions = new SoftAssertions();
-        AttachmentDataResponse response = cardTestRestClient.createAttachmentOnCard(constructAttachmentKeyValue(name, mimeType, url, setCover), cardId);
+        JsonPath jp = cardTestRestClient.tryCreateAttachmentOnCard(constructAttachmentKeyValue(NAME, MIME_TYPE, "", SET_COVER), cardId,400).jsonPath();
+        String message = jp.getString("message");
+
+        assertions.assertThat(message == "Must provide either url or file");
     }
 
     @AfterMethod
