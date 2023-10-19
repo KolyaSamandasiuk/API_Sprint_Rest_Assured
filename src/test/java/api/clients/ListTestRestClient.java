@@ -39,7 +39,7 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .response();
     }
 
-    @Step("Get lists by board id: {boardId}")
+    @Step("Get board lists by id: {boardId}")
     public List<ListsDataResponse> getLists(String boardId) {
         return given()
                 .spec(requestSpec)
@@ -57,6 +57,19 @@ public class ListTestRestClient extends AbstractBaseRestClient {
                 .spec(requestSpec)
                 .when()
                 .put("/1/lists/{listId}/idBoard?value={boardId}", listId, boardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract()
+                .as(ListsDataResponse.class);
+    }
+
+    @Step("Update list information with id: {idList}. Transfer the query parameters using listKeyValue: {listKeyValue} ")
+    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList){
+        return given()
+                .spec(requestSpec)
+                .queryParams(listKeyValue)
+                .when()
+                .put("/1/lists/{id}", idList)
                 .then()
                 .statusCode(HTTP_OK)
                 .extract()
@@ -83,5 +96,9 @@ public class ListTestRestClient extends AbstractBaseRestClient {
 
     public static Map<String, String> constructMoveAllCardsToListKeyValue(String boardId, String listId){
         return Map.of("idBoard" , boardId , "idList" , listId );
+    }
+
+    public static Map<String, String> constructPutListKeyValue(String name) {
+        return Map.of("name", name + " " + RandomStringUtils.randomAlphanumeric(3));
     }
 }
