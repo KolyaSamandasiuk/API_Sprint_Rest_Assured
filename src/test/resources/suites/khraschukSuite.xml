@@ -5,6 +5,7 @@
             <class name="api.post.CreateALabelOnBoardTest" />
             <class name="api.get.GetALabelsOnBoardTest" />
             <class name="api.delete.DeleteALabelTest" />
+            <class name="api.put.UpdateALabel" />
         </classes>
     </test>
 </suite>

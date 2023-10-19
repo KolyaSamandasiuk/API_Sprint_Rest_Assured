@@ -5,6 +5,7 @@
             <class name="api.get.GetListsOnBoardTest" />
             <class name="api.post.AddNewCommentToCardTest" />
             <class name="api.post.CreateAListOnBoardTest" />
+            <class name="api.put.UpdateListTest" />
         </classes>
     </test>
 </suite>

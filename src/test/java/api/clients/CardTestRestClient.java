@@ -2,14 +2,11 @@ package api.clients;
 
 import api.dto.AttachmentDataResponse;
 import api.dto.CardDataResponse;
-import api.dto.CreateLabelResponse;
 import io.qameta.allure.Step;
-import io.restassured.common.mapper.TypeRef;
 import io.restassured.response.Response;
 import io.restassured.response.ValidatableResponse;
 import org.apache.commons.lang3.RandomStringUtils;
 
-import java.util.List;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
@@ -61,6 +58,7 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .response();
     }
 
+    @Step("Delete the test card by id: {0}")
     public ValidatableResponse deleteCardIfExist(String cardId) {
         return given()
                 .spec(requestSpec)
@@ -70,13 +68,25 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
-    public Response getCardInfoByCardId(String cardId) {
+    public Response getCardId(String cardId) {
         return given()
                 .spec(requestSpec)
                 .get("/1/cards/{id}", cardId);
     }
 
-    @Step ("Add new comment to card by id: {idCard} with query params: {commentKeyValue}")
+    public CardDataResponse getCardInfoById(String cardId) {
+        return given()
+                .spec(requestSpec)
+                .get("/1/cards/{id}", cardId)
+                .then()
+                .extract().as(CardDataResponse.class);
+    }
+
+    public static Map<String, String> constructDefaultCardKeyValueWithDesc(String nameValue, String descValue) {
+        return Map.of("name", nameValue, "desc", descValue);
+    }
+
+    @Step("Add new comment to card by id: {idCard} with query params: {commentKeyValue}")
     public Response addNewCommentToCard(Map<String, String> commentKeyValue, String idCard) {
         return given()
                 .spec(requestSpec)
@@ -96,6 +106,6 @@ public class CardTestRestClient extends AbstractBaseRestClient {
     }
 
     public static Map<String, String> constructAttachmentKeyValue(String name, String mimeType, String url, String setCover) {
-        return Map.of("name",name,"mimeType",mimeType,"url",url, "setCover", setCover);
+        return Map.of("name", name, "mimeType", mimeType, "url", url, "setCover", setCover);
     }
 }

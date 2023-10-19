@@ -81,6 +81,18 @@ public class LabelRestTestClient extends AbstractBaseRestClient {
                 .get("/1/labels/{id}", checklabelId);
     }
 
+    @Step("Assigning parameters {1} to a label with an id: {0}")
+    public CreateLabelResponse putLabelInfo(String labelId, Map<String, String> infoToLabel) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToLabel)
+                .when()
+                .put("/1/labels/{id}", labelId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(CreateLabelResponse.class);
+    }
+
     public static Map<String, String> constructDefaultLabelKeyValue(String labelName, String labelColor, String idBoard) {
         return Map.of("name", labelName, "color", labelColor, "idBoard", idBoard);
     }
