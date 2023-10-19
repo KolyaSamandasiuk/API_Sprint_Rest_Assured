@@ -2,8 +2,9 @@
 <suite name="AllTestSuite">
     <test name="Khraschuk tests">
         <classes>
-            <class name="api.get.GetALabelsOnBoardTest" />
             <class name="api.post.CreateALabelOnBoardTest" />
+            <class name="api.get.GetALabelsOnBoardTest" />
+            <class name="api.delete.DeleteALabelTest" />
         </classes>
     </test>
 </suite>
