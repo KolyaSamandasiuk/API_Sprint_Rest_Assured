@@ -71,7 +71,6 @@ public class CardTestRestClient extends AbstractBaseRestClient {
 
     public static Map<String, String> constructDefaultCardKeyValueWithDesc(String nameValue, String descValue) {
         return Map.of("name", nameValue, "desc", descValue);
-
     }
 
     @Step("Add new comment to card by id: {idCard} with query params: {commentKeyValue}")
@@ -84,6 +83,18 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .statusCode(HTTP_OK)
                 .extract().response();
 
+    }
+
+    @Step("Assigning new parameters {} to card with id: {cardId}")
+    public CardDataResponse putCardInfo(String cardId, Map<String, String> infoToCard) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToCard)
+                .when()
+                .put("/1/cards/{id}", cardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(CardDataResponse.class);
     }
 
     public static Map<String, String> constructDefaultCardKeyValue() {
