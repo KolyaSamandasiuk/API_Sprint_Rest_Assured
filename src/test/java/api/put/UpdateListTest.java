@@ -21,8 +21,8 @@ public class UpdateListTest extends BaseTest {
     private String idList;
 
     @BeforeMethod
-    @Step("Create board and list")
-    public void createBoardAndList() {
+    @Step("Test preparation")
+    public void preconditions() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
     }
