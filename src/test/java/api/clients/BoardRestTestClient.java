@@ -55,7 +55,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_BAD_REQUEST)));
     }
 
-    public Response tryToDeleteBoardIfExist(String boardId, int statusCode) {
+    public Response tryToDeleteBoardWithInvalidId(String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
                 .when()

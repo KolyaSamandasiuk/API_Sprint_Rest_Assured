@@ -38,7 +38,7 @@ public class DeleteABoardTest extends BaseTest {
     @Test
     public void deleteBoardWithInvalidID() {
 
-        Response response = boardRestTestClient.tryToDeleteBoardIfExist("0025585647850200205", HTTP_BAD_REQUEST);
+        Response response = boardRestTestClient.tryToDeleteBoardWithInvalidId("0025585647850200205", HTTP_BAD_REQUEST);
 
         Assert.assertEquals(response.getBody().asString(), "invalid id");
     }
