@@ -13,6 +13,7 @@ import java.util.List;
 import static api.clients.BoardRestTestClient.constructDefaultBoardKeyValue;
 import static api.clients.ListTestRestClient.constructDefaultListKeyValue;
 import static api.clients.ListTestRestClient.constructPutListKeyValue;
+import static java.net.HttpURLConnection.HTTP_OK;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class UpdateListTest extends BaseTest {
@@ -30,7 +31,7 @@ public class UpdateListTest extends BaseTest {
     @Test(description = "AS2-37")
     @Description("Positive: Update a list by id")
     public void updateTheListInformation() {
-        ListsDataResponse updatedListResponse = listTestRestClient.updateListFromBoard(constructPutListKeyValue("Changed name for list"), idList);
+        ListsDataResponse updatedListResponse = listTestRestClient.updateListFromBoard(constructPutListKeyValue("Changed name for list"), idList, HTTP_OK);
         List<String> allListNames = listTestRestClient.getLists(idBoard).stream().map(ListsDataResponse::getName).toList();
 
         assertThat(updatedListResponse.getName()).isNotNull();
