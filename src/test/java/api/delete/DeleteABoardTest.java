@@ -3,11 +3,14 @@ package api.delete;
 import api.BaseTest;
 import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
 
 public class DeleteABoardTest extends BaseTest {
 
@@ -30,5 +33,13 @@ public class DeleteABoardTest extends BaseTest {
                 .asString();
 
         Assert.assertEquals(boardMessage, "The requested resource was not found.");
+    }
+
+    @Test
+    public void deleteBoardWithInvalidID() {
+
+        Response response = boardRestTestClient.tryToDeleteBoardWithInvalidId("0025585647850200205", HTTP_BAD_REQUEST);
+
+        Assert.assertEquals(response.getBody().asString(), "invalid id");
     }
 }
