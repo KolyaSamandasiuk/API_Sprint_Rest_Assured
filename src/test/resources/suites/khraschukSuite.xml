@@ -6,6 +6,7 @@
             <class name="api.get.GetALabelsOnBoardTest" />
             <class name="api.delete.DeleteALabelTest" />
             <class name="api.put.UpdateALabel" />
+            <class name="api.get.GetAEmojiTest" />
         </classes>
     </test>
 </suite>

@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_UNAUTHORIZED;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class CreateANewBoard extends BaseTest {
