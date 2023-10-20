@@ -4,6 +4,7 @@ import api.BaseTest;
 import api.dto.CreateBoardResponse;
 import io.qameta.allure.Description;
 import io.restassured.path.json.JsonPath;
+import io.restassured.response.Response;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -33,6 +34,20 @@ public class CreateANewBoard extends BaseTest {
         deleteBoard();
     }
 
+    @Test(description = "AS2-34")
+    @Description("Negative: Create a Board with invalid token")
+    public void createBoardWithNegativeToken() {
+        Map<String, String> boardParams = new HashMap<>();
+        boardParams.put("name", "Test board");
+
+        Response response = boardRestTestClient.createNewBoardWithInvalidToken(boardParams, HTTP_UNAUTHORIZED);
+
+        String message = response.asString();
+
+        assertThat(message).isEqualTo("invalid token");
+
+    }
+
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(ID_BOARD);
     }
@@ -44,10 +59,7 @@ public class CreateANewBoard extends BaseTest {
         Map<String, String> boardParams = new HashMap<>();
         boardParams.put("name", " ");
 
-            boardRestTestClient.tryToCreateABoard(boardParams, HTTP_BAD_REQUEST);
-
-        String jsonResponse = "{ \"message\": \"invalid value for name\", \"error\": \"ERROR\" }";
-        JsonPath jp = new JsonPath(jsonResponse);
+        JsonPath jp = boardRestTestClient.tryToCreateABoard(boardParams, HTTP_BAD_REQUEST).jsonPath();
         String message = jp.getString("message");
 
         assertThat(message).isEqualTo("invalid value for name");

@@ -20,3 +20,8 @@ All Shevchuk tests:
 ```bash
 mvn -DsuiteXmlFile=shevchukSuite.xml test
 ```
+
+All Yablonchuk tests:
+```bash
+mvn -DsuiteXmlFile=yablonchukSuite.xml test
+```
