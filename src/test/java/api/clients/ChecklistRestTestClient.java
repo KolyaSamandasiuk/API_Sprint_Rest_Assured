@@ -51,6 +51,18 @@ public class ChecklistRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_NOT_FOUND)));
     }
 
+    @Step("Try to delete the test checklist by id: {0}")
+    public Response tryDeleteChecklistIfExist(String checklistId, int statusCode) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .delete("/1/checklists/{id}", checklistId)
+                .then()
+                .statusCode(statusCode)
+                .extract()
+                .response();
+    }
+
     @Step("Trying to find the checklist by id: {checklistId}")
     public Response tryGetChecklistById(String checklistId) {
         return given()
