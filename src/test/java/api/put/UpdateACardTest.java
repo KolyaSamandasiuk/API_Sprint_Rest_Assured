@@ -26,8 +26,8 @@ public class UpdateACardTest extends BaseTest {
     private String idCard;
 
     @BeforeMethod
-    @Step("Fulfillment of the prerequisites for the test")
-    public void createCardOfListOnABoard() {
+    @Step("Test preparation")
+    public void preconditions() {
         idBoard = boardRestTestClient.createNewBoard(constructDefaultBoardKeyValue()).getId();
         idList = listTestRestClient.createList(constructDefaultListKeyValue(), idBoard).getId();
         idCard = cardTestRestClient.createCard(constructDefaultCardKeyValueWithDesc(NAME_VALUE, DESC_VALUE), idList).getId();
