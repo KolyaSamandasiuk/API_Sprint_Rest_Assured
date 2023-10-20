@@ -97,6 +97,18 @@ public class CardTestRestClient extends AbstractBaseRestClient {
                 .extract().response();
     }
 
+    @Step("Assigning new parameters {} to card with id: {cardId}")
+    public CardDataResponse putCardInfo(String cardId, Map<String, String> infoToCard) {
+        return given()
+                .spec(requestSpec)
+                .body(infoToCard)
+                .when()
+                .put("/1/cards/{id}", cardId)
+                .then()
+                .statusCode(HTTP_OK)
+                .extract().as(CardDataResponse.class);
+    }
+
     public static Map<String, String> constructDefaultCardKeyValue() {
         return Map.of("name", "Test card " + RandomStringUtils.randomAlphanumeric(3));
     }
