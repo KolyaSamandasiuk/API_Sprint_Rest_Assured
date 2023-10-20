@@ -10,4 +10,5 @@ public class BaseTest {
     protected static CardTestRestClient cardTestRestClient = new CardTestRestClient(BASE_URL);
     protected static LabelRestTestClient labelRestTestClient = new LabelRestTestClient(BASE_URL);
     protected static ChecklistRestTestClient checklistRestTestClient = new ChecklistRestTestClient(BASE_URL);
+    protected static EmojiRestTestClient emojiRestTestClient = new EmojiRestTestClient(BASE_URL);
 }
