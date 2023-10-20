@@ -52,28 +52,40 @@ public class ListTestRestClient extends AbstractBaseRestClient {
     }
 
     @Step("Move list with id: {listId} to board with id: {boardId}")
-    public ListsDataResponse moveList(String listId, String boardId) {
+    public ListsDataResponse moveList(String listId, String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
                 .when()
                 .put("/1/lists/{listId}/idBoard?value={boardId}", listId, boardId)
                 .then()
-                .statusCode(HTTP_OK)
+                .statusCode(statusCode)
                 .extract()
                 .as(ListsDataResponse.class);
     }
 
     @Step("Update list information with id: {idList}. Transfer the query parameters using listKeyValue: {listKeyValue} ")
-    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList) {
+    public ListsDataResponse updateListFromBoard(Map<String, String> listKeyValue, String idList, int statusCode) {
         return given()
                 .spec(requestSpec)
                 .queryParams(listKeyValue)
                 .when()
                 .put("/1/lists/{id}", idList)
                 .then()
-                .statusCode(HTTP_OK)
+                .statusCode(statusCode)
                 .extract()
                 .as(ListsDataResponse.class);
+    }
+
+    @Step("Try to move list with invalid id: {listId} to board with id: {boardId}")
+    public Response tryToMoveList(String listId, String boardId, int statusCode) {
+        return given()
+                .spec(requestSpec)
+                .when()
+                .put("/1/lists/{listId}/idBoard?value={boardId}", listId, boardId)
+                .then()
+                .statusCode(statusCode)
+                .extract()
+                .response();
     }
 
     @Step("Moving all cards from list by id: {listId} and with parameters: {moveCardsInListKeyValue}")
