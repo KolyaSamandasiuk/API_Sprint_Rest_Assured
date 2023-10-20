@@ -52,7 +52,6 @@ public class DeleteAChecklistTest extends BaseTest {
         Assert.assertEquals(response.getBody().asString(), "invalid id");
     }
 
-
     @AfterMethod
     public void deleteBoard() {
         boardRestTestClient.deleteBoardIfExist(boardId);
