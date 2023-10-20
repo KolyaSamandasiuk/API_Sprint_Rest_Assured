@@ -10,7 +10,8 @@ import org.apache.commons.lang3.RandomStringUtils;
 import java.util.Map;
 
 import static io.restassured.RestAssured.given;
-import static java.net.HttpURLConnection.*;
+import static java.net.HttpURLConnection.HTTP_BAD_REQUEST;
+import static java.net.HttpURLConnection.HTTP_OK;
 import static org.hamcrest.CoreMatchers.anyOf;
 import static org.hamcrest.Matchers.is;
 
@@ -68,7 +69,7 @@ public class BoardRestTestClient extends AbstractBaseRestClient {
                 .statusCode(anyOf(is(HTTP_OK), is(HTTP_BAD_REQUEST)));
     }
 
-    @Step ("Trying to delete board with invalid id")
+    @Step("Trying to delete board with invalid id: {boardId}")
     public Response tryToDeleteBoardWithInvalidId(String boardId, int statusCode) {
         return given()
                 .spec(requestSpec)
